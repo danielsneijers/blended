@@ -1,16 +1,15 @@
 var webpack = require('webpack');
 var path = require("path");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var autoprefixer = require('autoprefixer');
-var precss= require('precss');
 
 module.exports = {
   cache: true,
   entry: [
     "./src/app/app.js",
-    "./src/css/styles.css"
+    "./src/scss/styles.scss"
   ],
   devtool: 'source-map',
-  publicPath: './src/',
   output: {
     path: path.resolve("./dist"),
     filename: "app.js"
@@ -23,16 +22,21 @@ module.exports = {
         loader: 'babel'
       },
       {
-        test:   /\.css$/,
-        include: [
-          path.resolve(__dirname, "./src/css"),
-        ],
-        loader: "style-loader!css-loader!postcss-loader"
+        test:   /\.scss$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader?sourceMap!sass-loader?sourceMap')
       }
     ]
   },
   postcss: function () {
-    return [autoprefixer,precss];
+    return { 
+      defaults: [autoprefixer],
+      cleaner:  [autoprefixer({ browsers: ["last 2 versions"] })]
+    };
   },
-  plugins: []
+  plugins: [
+    new ExtractTextPlugin('styles.css')
+  ],
+  resolve: {
+    extensions: ["", ".js", ".css"],
+  },
 };

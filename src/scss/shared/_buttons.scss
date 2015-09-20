@@ -1,0 +1,14 @@
+.button {
+	display: inline-block;
+	outline: none;
+	border: none;
+	border-radius: 3px;
+	padding: 0.5rem 1rem;
+	background-color: $orange;
+	font-family: 'Dosis', 'Helvetica Neue', Helvetica, sans-serif;
+	color: white;
+
+	&:hover {
+		background-color: darken($orange, 10%);
+	}
+}

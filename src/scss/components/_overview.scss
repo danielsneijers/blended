@@ -1,0 +1,19 @@
+.overview-container {
+	list-style: none;
+	white-space: nowrap;
+	overflow-x: auto;
+	overflow-y: hidden;
+	margin: 0;
+	width: auto;
+	height: calc(100vh - 74px);
+	padding: 1rem;
+	background-color: $off-white;
+
+	.slide:hover {
+		cursor: pointer;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+		transform: translateY(-3px);
+			transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+	}
+}

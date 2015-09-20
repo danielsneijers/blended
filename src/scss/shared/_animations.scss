@@ -1,0 +1,26 @@
+.slideInDown-appear,
+.slideInDown-enter {
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: transform 0.5s ease, opacity 0.5s ease-out;
+}
+
+.slideInDown-appear.slideInDown-appear-active,
+.slideInDown-enter.slideInDown-enter-active {
+	opacity: 1;
+	transform: translateY(0%);
+}
+
+.fadeInUp-appear,
+.fadeInUp-enter {
+	transform: translateY(100%);
+	opacity: 0;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	transition-delay: 0.2s;
+}
+
+.fadeInUp-appear.fadeInUp-appear-active,
+.fadeInUp-enter.fadeInUp-enter-active {
+	opacity: 1;
+	transform: translateY(0%);
+}

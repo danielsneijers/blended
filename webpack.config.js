@@ -35,8 +35,5 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('styles.css')
-  ],
-  resolve: {
-    extensions: ["", ".js", ".css"],
-  },
+  ]
 };

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react/addons';
 import Classnames from 'classnames';
-import CommitActions from '../actions/commitActions';
-import CommitStore from '../stores/commitStore';
-import CommitListItem from './commitListItem';
+// import CommitActions from '../actions/commitActions';
+// import CommitStore from '../stores/commitStore';
+// import CommitListItem from './commitListItem';
 
 const {addons: {CSSTransitionGroup}} = React;
 
@@ -41,7 +41,7 @@ class CommitList extends Component {
 		let id = this.props.params ? this.props.params.id : this.props.slideId;
 
 		return (
-			<CSSTransitionGroup className='slide' transitionName='fadeInUp' transitionAppear={true} component='li'>
+			<CSSTransitionGroup className='slide' transitionName='fadeInUp' transitionAppear={true}>
 				<div>slide {id}</div>
 	  	</CSSTransitionGroup>
 		);

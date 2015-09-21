@@ -7,7 +7,7 @@ import Slide from './components/slide';
 
 export default (
 	<Route name="root" path="/" handler={Main}>
-		<Route name="/" handler={Overview} />
+		<Route name="/slides" handler={Overview} />
 		<Route name="/slides/:id" handler={Slide} />
   </Route>
 );

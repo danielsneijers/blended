@@ -1,5 +1,6 @@
 import React, { Component } from 'react/addons';
 import { RouteHandler } from 'react-router';
+import SlideActions from '../actions/slideActions.js';
 
 const {addons: {CSSTransitionGroup}} = React;
 
@@ -9,9 +10,16 @@ class Main extends Component {
 		super(props);
 	}
 
+	componentDidMount() {
+		SlideActions.fetchAll();
+	}
+
 	// Methods
-	switchToFullScreen() {
+	switchToFullScreen(e) {
+		e.preventDefault();
+		
 		let elem = document.getElementById("page-container");
+
 		if (elem.requestFullscreen) {
 		  elem.requestFullscreen();
 		} else if (elem.msRequestFullscreen) {
@@ -23,6 +31,14 @@ class Main extends Component {
 		}
 	}
 
+	handleCreate(e) {
+		console.log('%c Main / handleCreate ', 'background-color: #29BB9C; color: white;');
+	}
+
+	handleDeleteAll(e) {
+		SlideActions.deleteAll();
+	}
+
 	// Render
 	render() {
 		return (
@@ -30,7 +46,9 @@ class Main extends Component {
         <CSSTransitionGroup transitionName='slideInDown' transitionAppear={true}>
         	<nav className='navigation' role='navigation'>
         		<h1>Blended</h1>
-          	<button className='button' onClick={this.switchToFullScreen}>fullscreen</button>
+          	<button className='hidden button' onClick={this.switchToFullScreen}>fullscreen</button>
+          	<button className='button' onClick={this.handleCreate}>create</button>
+          	<button className='button' onClick={this.handleDeleteAll}>delete all</button>
           </nav>
         </CSSTransitionGroup>
         <RouteHandler {...this.props} />

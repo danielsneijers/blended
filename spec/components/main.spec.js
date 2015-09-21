@@ -1,6 +1,6 @@
 const React = require("react/addons");
 const TestUtils = React.addons.TestUtils;
-const ReactRouterContext = require('../../src/app/util/ReactRouterContext.js');
+const ReactRouterContext = require('../../src/app/util/reactRouterContext.js');
 
 let Main = require("../../src/app/components/main"),
     main,

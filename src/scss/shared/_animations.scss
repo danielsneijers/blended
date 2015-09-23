@@ -1,6 +1,6 @@
 .slideInDown-appear,
 .slideInDown-enter {
-	transform: translateY(-100%);
+	transform: translateY(-20%);
 	opacity: 0;
 	transition: transform 0.3s ease, opacity 0.3s ease-out;
 }
@@ -13,7 +13,7 @@
 
 .fadeInUp-appear,
 .fadeInUp-enter {
-	transform: translateY(100%);
+	transform: translateY(20%);
 	opacity: 0;
 	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 	transition-delay: 0.2s;

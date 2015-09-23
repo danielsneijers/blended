@@ -1,27 +1,20 @@
 .overview-container {
+	position: absolute;
+	// TODO: make fix for this absolute height
+	top: 74px;
+	left: 0;
 	list-style: none;
-	white-space: nowrap;
-	overflow-x: auto;
-	overflow-y: hidden;
 	margin: 0;
-	width: auto;
-	height: calc(100vh - 74px);
-	padding: 1rem;
+	width: 15rem;
+	height: 100vh;
+	overflow: scroll;
+	padding: 0 1rem 1rem;
 	background-color: $off-white;
 
 	.overview-item {
-		display: inline-block;
-		margin-right: 1rem;
-		width: 60vw;
-		height: 70vh;
-		box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
-		background-color: white;	
-		padding: 1rem;
+		margin-bottom: 1rem;
 		transition: transform 0.15s ease, box-shadow 0.15s ease;
 
-		&:last-of-type {
-			margin-right: 0;
-		}
 		&:hover {
 			cursor: pointer;
 			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
@@ -29,9 +22,9 @@
 			transition: transform 0.15s ease, box-shadow 0.15s ease;
 		}
 
-		a {
-			display: block;
-			height: 100%;
-		}
+		// a {
+		// 	display: block;
+		// 	height: 100%;
+		// }
 	}
 }

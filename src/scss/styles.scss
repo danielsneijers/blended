@@ -4,6 +4,9 @@
 @import "base/normalize";
 @import "base/typography";
 
+// Mixins
+@import "mixins/aspect-ratio";
+
 // Shared
 @import "shared/grid";
 @import "shared/buttons";

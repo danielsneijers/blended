@@ -1,7 +1,7 @@
 import React, { Component } from 'react/addons';
 import { RouteHandler } from 'react-router';
 import SlideActions from '../actions/slideActions.js';
-import SlideStore from '../stores/slideStore';
+import Overview from '../components/overview.js';
 
 const {addons: {CSSTransitionGroup}} = React;
 
@@ -9,12 +9,6 @@ class Main extends Component {
 
 	constructor(props) {
 		super(props);
-	}
-	componentWillMount() {
-		SlideStore.addChangeListener(this._onChange.bind(this));
-	}
-	componentWillUnmount() {
-		SlideStore.removeChangeListener(this._onChange.bind(this));
 	}
 
 	// Methods
@@ -42,10 +36,6 @@ class Main extends Component {
 		SlideActions.deleteAll();
 	}
 
-	tempGetall() {
-		SlideActions.getAll();
-	}
-
 	// Render
 	render() {
 		return (
@@ -55,17 +45,14 @@ class Main extends Component {
         		<h1>Blended</h1>
           	<button className='hidden button' onClick={this.switchToFullScreen}>fullscreen</button>
           	<button className='button' onClick={this.handleCreate}>create</button>
-          	<button className='button' onClick={this.tempGetall}>get all</button>
           	<button className='button' onClick={this.handleDeleteAll}>delete all</button>
           </nav>
         </CSSTransitionGroup>
-        <RouteHandler {...this.props} />
+        <Overview />
+        <div className='slide-container'>
+        	<RouteHandler {...this.props} />
+        </div>
 	  	</div>);
-	}
-
-	_onChange(){
-		console.log('hoi');
-		//this.setState({ commits: CommitStore.getCommits() });
 	}
 };
 

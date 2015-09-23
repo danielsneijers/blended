@@ -1,10 +1,8 @@
-import AppDispatcher from '../dispatcher/appDispatcher.js';
 import Api from '../util/api.js';
-//import CommitConstants from '../constants/commitConstants.js';
 
 export default {
   
-  fetchAll: () => {
+  getAll: () => {
   	Api.getAll();
   },
 

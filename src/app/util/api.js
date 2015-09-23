@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/appDispatcher.js';
-//import CommitConstants from '../constants/commitConstants.js';
+import SlideConstants from '../constants/slideConstants.js';
 
 let db;
 
@@ -13,12 +13,7 @@ let db;
     console.log("Upgrading");
     db = e.target.result;
     let objectStore = db.createObjectStore("slides", { keyPath : "id", autoIncrement: true });
-    //objectStore.createIndex("title", "title", { unique: false });
-    // objectStore.createIndex("minutes", "minutes", { unique: false });
-    // objectStore.createIndex("day", "day", { unique: false });
-    // objectStore.createIndex("month", "month", { unique: false });
-    // objectStore.createIndex("year", "year", { unique: false });
-    // objectStore.createIndex("notified", "notified", { unique: false });
+    objectStore.createIndex("title", "title", { unique: false });
   };
   req.onsuccess  = (e) => {
     db = e.target.result;
@@ -50,8 +45,11 @@ export default {
       if (cursor) {
         slides.push(cursor.value);
         cursor.continue();
-      }
-      else {
+      } else {
+        AppDispatcher.dispatch({
+          actionType: SlideConstants.GET_ALL_SLIDES,
+          data: slides
+        });
         console.log(slides);
       }
     };

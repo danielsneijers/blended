@@ -1,6 +1,7 @@
 import React, { Component } from 'react/addons';
 import { RouteHandler } from 'react-router';
 import SlideActions from '../actions/slideActions.js';
+import SlideStore from '../stores/slideStore';
 
 const {addons: {CSSTransitionGroup}} = React;
 
@@ -9,8 +10,11 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 	}
-	componentDidMount() {
-		// SlideActions.fetchAll();
+	componentWillMount() {
+		SlideStore.addChangeListener(this._onChange.bind(this));
+	}
+	componentWillUnmount() {
+		SlideStore.removeChangeListener(this._onChange.bind(this));
 	}
 
 	// Methods
@@ -39,7 +43,7 @@ class Main extends Component {
 	}
 
 	tempGetall() {
-		SlideActions.fetchAll();
+		SlideActions.getAll();
 	}
 
 	// Render
@@ -57,6 +61,11 @@ class Main extends Component {
         </CSSTransitionGroup>
         <RouteHandler {...this.props} />
 	  	</div>);
+	}
+
+	_onChange(){
+		console.log('hoi');
+		//this.setState({ commits: CommitStore.getCommits() });
 	}
 };
 

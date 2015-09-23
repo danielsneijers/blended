@@ -7,12 +7,14 @@ export default {
   },
 
   createSlide: () => {
-  	console.log('%c SlideActions / createSlide ', 'background-color: #29BB9C; color: white;');
-  	Api.post('title van slide vette shit');
+  	Api.post();
+  },
+
+  deleteSlide: (id) => {
+    Api.delete(id);
   },
 
   deleteAll: () => {
-  	console.log('%c SlideActions / deleteAll ', 'background-color: #29BB9C; color: white;');
   	Api.reset();
   }
 }

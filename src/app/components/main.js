@@ -9,9 +9,8 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 	}
-
 	componentDidMount() {
-		SlideActions.fetchAll();
+		// SlideActions.fetchAll();
 	}
 
 	// Methods
@@ -32,11 +31,15 @@ class Main extends Component {
 	}
 
 	handleCreate(e) {
-		console.log('%c Main / handleCreate ', 'background-color: #29BB9C; color: white;');
+		SlideActions.createSlide();
 	}
 
 	handleDeleteAll(e) {
 		SlideActions.deleteAll();
+	}
+
+	tempGetall() {
+		SlideActions.fetchAll();
 	}
 
 	// Render
@@ -48,6 +51,7 @@ class Main extends Component {
         		<h1>Blended</h1>
           	<button className='hidden button' onClick={this.switchToFullScreen}>fullscreen</button>
           	<button className='button' onClick={this.handleCreate}>create</button>
+          	<button className='button' onClick={this.tempGetall}>get all</button>
           	<button className='button' onClick={this.handleDeleteAll}>delete all</button>
           </nav>
         </CSSTransitionGroup>

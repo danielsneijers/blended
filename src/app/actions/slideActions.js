@@ -1,7 +1,7 @@
 import Api from '../util/api.js';
 
 export default {
-  
+
   getAll: () => {
   	Api.getAll();
   },

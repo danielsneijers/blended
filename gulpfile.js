@@ -33,7 +33,7 @@ gulp.task("webpack-dev-server", function(callback) {
 		},
 		historyApiFallback: true
   }).listen(8080, "localhost", function(err) {
-    if(err) 
+    if(err)
     	throw new gutil.PluginError("webpack-dev-server", err);
     gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
   });
@@ -52,7 +52,7 @@ gulp.task("webpack:build", function(callback) {
 	);
 
 	webpack(myConfig, function(err, stats) {
-		if(err) 
+		if(err)
 			throw new gutil.PluginError("webpack:build", err);
 		gutil.log("[webpack:build]", stats.toString({
 			colors: true
@@ -63,7 +63,7 @@ gulp.task("webpack:build", function(callback) {
 
 gulp.task('copy', function(){
 	gulp.src(['src/index.html', 'src/img/**/*.*'], { base: './src' })
-		.pipe(gulp.dest('dist'));	
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('server', function() {

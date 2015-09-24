@@ -1,6 +1,6 @@
 .slideInDown-appear,
 .slideInDown-enter {
-	transform: translateY(-20%);
+	transform: translateY(-10%);
 	opacity: 0;
 	transition: transform 0.3s ease, opacity 0.3s ease-out;
 }
@@ -11,16 +11,18 @@
 	transform: translateY(0%);
 }
 
-.fadeInUp-appear,
-.fadeInUp-enter {
-	transform: translateY(20%);
+.fadeIn-appear,
+.fadeIn-enter {
+	//transform: translateY(10%);
 	opacity: 0;
-	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	// transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	transition: opacity 0.3s ease-out;
+	//will-change: transform;
 	transition-delay: 0.2s;
 }
 
-.fadeInUp-appear.fadeInUp-appear-active,
-.fadeInUp-enter.fadeInUp-enter-active {
+.fadeIn-appear.fadeIn-appear-active,
+.fadeIn-enter.fadeIn-enter-active {
 	opacity: 1;
-	transform: translateY(0%);
+	//transform: translateY(0%);
 }

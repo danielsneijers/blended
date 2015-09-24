@@ -5,7 +5,16 @@ import SlideConstants from '../constants/slideConstants';
 let _slides = [];
 
 class SlideStore extends Store {
-  getSlides() {
+  getSlide(id) {
+    for(let i = 0; i < _slides.length; i++){
+      console.log(_slides[i].id);
+      if(_slides[i].id == id){
+        console.log(_slides[i]);
+        return _slides[i];
+      }
+    }
+  }
+  getAllSlides() {
     return _slides;
   }
 }
@@ -19,7 +28,6 @@ AppDispatcher.register((payload) => {
     switch(payload.actionType) {
       case SlideConstants.GET_ALL_SLIDES:
         _slides = payload.data;
-
         _slideStore.emitChange();
         break;
 
@@ -39,7 +47,7 @@ AppDispatcher.register((payload) => {
         _slides = [];
         _slideStore.emitChange();
         break;
-    
+
       default:
         break;
     }

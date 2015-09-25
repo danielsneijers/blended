@@ -14,6 +14,7 @@ let databaseConnect = (callback) => {
     db = e.target.result;
     let objectStore = db.createObjectStore("slides", { keyPath : "id", autoIncrement: true });
     objectStore.createIndex("title", "title", { unique: false });
+    objectStore.createIndex("position", "position", { unique: false });
   };
   req.onsuccess  = (e) => {
     db = e.target.result;
@@ -23,24 +24,6 @@ let databaseConnect = (callback) => {
 };
 
 const Api = {
-
-  get: (id) => {
-  	console.log('%c Api / get ', 'background-color: #3498DB; color: white;');
-    databaseConnect(() => {
-      let transaction = db.transaction(["slides"],"readonly")
-                        .objectStore("slides")
-                        .get(id);
-      transaction.onerror = (e) => {
-          // TODO: create errorstore and put error
-          console.log("Error");
-      };
-      transaction.onsuccess = (e) => {
-          // TODO: create errorstore and put error
-          console.log("Error");
-          db.close();
-      };
-    });
-  },
 
   getAll: () => {
     console.log('%c Api / get all ', 'background-color: #3498DB; color: white;');
@@ -66,7 +49,7 @@ const Api = {
   },
 
   post: (slide) => {
-    slide = {title: 'testslide'};
+    slide = {title: 'Title', position: '1'};
   	console.log('%c Api / post ', 'background-color: #3498DB; color: white;');
     databaseConnect(() => {
       let transaction = db.transaction(["slides"],"readwrite")

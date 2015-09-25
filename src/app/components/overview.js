@@ -12,9 +12,6 @@ class Overview extends Component {
 	// Component lifecycle
 	constructor(props) {
 		super(props);
-		this.state = {
-			allSlides: []
-		}
 	}
 	componentDidMount() {
     let overviewContainer = React.findDOMNode(this);
@@ -23,7 +20,7 @@ class Overview extends Component {
     }).on('dragend', this.saveSortingOrder);
   }
 	componentWillReceiveProps(nextProps) {
-		this.setState({ allSlides: nextProps.allSlides });
+		console.log(nextProps);
 	}
 
 	// Helpers
@@ -34,14 +31,17 @@ class Overview extends Component {
 	// Render
 	render() {
 
+		console.log(this.props.allSlides);
+
 		let slides = [];
 
-		for(let i = 0; i < this.state.allSlides.length; i++){
-			let url = `/slide/${this.state.allSlides[i].id}`;
-			let key = `overview-slide-${this.state.allSlides[i].id}`;
+		for(let slide of this.props.allSlides){
+			console.log(slide);
+			let url = `/slide/${slide.id}`;
+			let key = `overview-slide-${slide.id}`;
 			slides.push(
 				<div key={key} className='overview-item'>
-					<Link to={url}><SlidePreview slide={this.state.allSlides[i]} /></Link>
+					<Link to={url}><SlidePreview slide={slide} /></Link>
 				</div>
 			);
 		};

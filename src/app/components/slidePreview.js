@@ -12,26 +12,18 @@ class CommitList extends Component {
 	// Component lifecycle
 	constructor(props) {
     super(props);
-		this.state = {
-    	slideId: this.props.slide.id,
-    	slide: this.props.slide,
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-		this.setState({ slide: nextProps.slide });
   }
 
   // Event handlers
   handleDelete(e) {
   	e.preventDefault();
-  	SlideActions.deleteSlide(this.props.slideId);
+  	SlideActions.deleteSlide(this.props.slide.id);
   }
 
 	// Render
 	render() {
 
-
-		let title =  this.state.slide.title;
+		let title =  this.props.slide.title;
 		let styles = {
 		  backgroundImage: `url(/img/building.jpeg)`,
 		};

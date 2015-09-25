@@ -1,18 +1,11 @@
 import Store from './store';
 import AppDispatcher from '../dispatcher/appDispatcher';
+import SlideActions from '../actions/slideActions';
 import SlideConstants from '../constants/slideConstants';
 
 let _slides = [];
 
 class SlideStore extends Store {
-  getSlide(id) {
-    for(let i = 0; i < _slides.length; i++){
-      console.log(_slides[i].id);
-      if(_slides[i].id == id){
-        return _slides[i];
-      }
-    }
-  }
   getAllSlides() {
     return _slides;
   }
@@ -31,8 +24,7 @@ AppDispatcher.register((payload) => {
         break;
 
       case SlideConstants.CREATE_SLIDE:
-        _slides.push(payload.data);
-        _slideStore.emitChange();
+        SlideActions.getAll();
         break;
 
       case SlideConstants.UPDATE_SLIDE:
@@ -44,9 +36,9 @@ AppDispatcher.register((payload) => {
         break;
 
       case SlideConstants.DELETE_SLIDE:
-        for(let i = 0; i < _slides.length; i++){
-          if(payload.data == _slides[i].id) _slides.splice(i, 1);
-        }
+        _slides.forEach((slide, index) => {
+          if(payload.data == slide.id) _slides.splice(index, 1);
+        });
         _slideStore.emitChange();
         break;
 

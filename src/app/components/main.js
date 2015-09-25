@@ -1,30 +1,18 @@
 import React, { Component } from 'react/addons';
 import { RouteHandler } from 'react-router';
 import SlideActions from '../actions/slideActions.js';
-import SlideStore from '../stores/slideStore';
-import Overview from '../components/overview.js';
+import PageContent from '../components/pageContent.js';
 
 const {addons: {CSSTransitionGroup}} = React;
 
 class Main extends Component {
 
+	// Init
 	constructor(props) {
 		super(props);
-		this.state = {
-			allSlides: []
-		}
-	}
-	componentWillMount() {
-		SlideStore.addChangeListener(this._onChange.bind(this));
-	}
-	componentDidMount() {
-		SlideActions.getAll();
-	}
-	componentWillUnmount() {
-		SlideStore.removeChangeListener(this._onChange.bind(this));
 	}
 
-	// Methods
+	// Helpers
 	switchToFullScreen(e) {
 		e.preventDefault();
 
@@ -40,11 +28,9 @@ class Main extends Component {
 		  elem.webkitRequestFullscreen();
 		}
 	}
-
 	handleCreate(e) {
 		SlideActions.createSlide();
 	}
-
 	handleDeleteAll(e) {
 		SlideActions.deleteAll();
 	}
@@ -61,14 +47,8 @@ class Main extends Component {
           	<button className='button' onClick={this.handleDeleteAll}>delete all</button>
           </nav>
         </CSSTransitionGroup>
-        <Overview allSlides={this.state.allSlides} />
-        <RouteHandler {...this.props} allSlides={this.state.allSlides} />
+        <RouteHandler />
 	  	</div>);
-	}
-
-	// onChange
-	_onChange(){
-		this.setState({ allSlides: SlideStore.getAllSlides() });
 	}
 };
 

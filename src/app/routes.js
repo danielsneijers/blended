@@ -1,12 +1,12 @@
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { Router, DefaultRoute, Route } from 'react-router';
 import Main from './components/main';
-import Overview from './components/overview';
-import Slide from './components/slide';
+import PageContent from './components/pageContent';
 
 
 export default (
-	<Route name="root" path="/" handler={Main}>
-		<Route name="/slide/:id" handler={Slide} />
+	<Route path="/" handler={Main}>
+    <DefaultRoute handler={PageContent} />
+		<Route path="/slide/:id" handler={PageContent} />
   </Route>
 );

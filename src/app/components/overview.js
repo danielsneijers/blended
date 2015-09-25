@@ -1,5 +1,6 @@
 import React, { Component } from 'react/addons';
 import { Link } from 'react-router';
+import Dragula from 'react-dragula';
 import SlideActions from '../actions/slideActions.js';
 import SlideStore from '../stores/slideStore';
 import SlidePreview from './slidePreview';
@@ -15,8 +16,19 @@ class Overview extends Component {
 			allSlides: []
 		}
 	}
+	componentDidMount() {
+    let overviewContainer = React.findDOMNode(this);
+    Dragula([overviewContainer], {
+    	mirrorContainer: overviewContainer
+    }).on('dragend', this.saveSortingOrder);
+  }
 	componentWillReceiveProps(nextProps) {
 		this.setState({ allSlides: nextProps.allSlides });
+	}
+
+	// Helpers
+	saveSortingOrder() {
+		console.log('save order');
 	}
 
 	// Render
@@ -28,16 +40,16 @@ class Overview extends Component {
 			let url = `/slide/${this.state.allSlides[i].id}`;
 			let key = `overview-slide-${this.state.allSlides[i].id}`;
 			slides.push(
-				<li key={key} className='overview-item'>
-					<Link to={url}><SlidePreview slideId={this.state.allSlides[i].id} /></Link>
-				</li>
+				<div key={key} className='overview-item'>
+					<Link to={url}><SlidePreview slide={this.state.allSlides[i]} /></Link>
+				</div>
 			);
 		};
 
 		return (
-			<ul className='overview-container'>
+			<div className='overview-container'>
 				{slides}
-	  	</ul>);
+	  	</div>);
 	}
 
 	_onChange(){

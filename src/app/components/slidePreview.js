@@ -12,12 +12,13 @@ class CommitList extends Component {
 	// Component lifecycle
 	constructor(props) {
     super(props);
-    this.state = {
-    	slideId: this.props.slideId ? this.props.slideId : this.props.params.id
+		this.state = {
+    	slideId: this.props.slide.id,
+    	slide: this.props.slide,
     }
   }
-  componentWillMount(){
-  	//SlideStore.getSlide(this.state.slideId);
+  componentWillReceiveProps(nextProps) {
+		this.setState({ slide: nextProps.slide });
   }
 
   // Event handlers
@@ -30,14 +31,14 @@ class CommitList extends Component {
 	render() {
 
 
-		let id = this.props.params ? this.props.params.id : this.props.slideId;
+		let title =  this.state.slide.title;
 		let styles = {
 		  backgroundImage: `url(/img/building.jpeg)`,
 		};
 
 		return (
 				<div className='content' style={styles}>
-					<div>slide {id}</div>
+					<div>{title}</div>
 					<button onClick={this.handleDelete.bind(this)}>delete</button>
 				</div>
 		);

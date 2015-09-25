@@ -13,7 +13,7 @@ class CommitList extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	slideId: this.props.params.id,
+    	slideId: this.props.slide.id,
     	slide: this.props.slide,
     	dirty: false
     }

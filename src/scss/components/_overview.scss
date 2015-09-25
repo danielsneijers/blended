@@ -26,6 +26,11 @@
 			@include aspect-ratio(16, 9);
 			display: block;
 			height: 100%;
+			color: white;
+		}
+
+		button {
+			color: $grey;
 		}
 	}
 }

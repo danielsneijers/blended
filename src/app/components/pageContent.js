@@ -48,7 +48,7 @@ class PageContent extends Component {
 		return (
 			<div id='page-content'>
         <Overview allSlides={this.state.allSlides} />
-        <SlideContainer />
+        <SlideContainer slide={this.state.currentSlide} />
 	  	</div>);
 	}
 

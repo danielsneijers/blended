@@ -31,12 +31,9 @@ class Overview extends Component {
 	// Render
 	render() {
 
-		console.log(this.props.allSlides);
-
 		let slides = [];
 
 		for(let slide of this.props.allSlides){
-			console.log(slide);
 			let url = `/slide/${slide.id}`;
 			let key = `overview-slide-${slide.id}`;
 			slides.push(

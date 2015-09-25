@@ -54,9 +54,8 @@ class CommitList extends Component {
 
 		// console.log(this.state.slide);
 
-		//let slide = this.state.slide || {};
-		//let title = slide.title;
-		let title = 'heyhoi';
+		let slide = this.props.slide;
+		let title = slide.title;
 		let styles = {
 		  backgroundImage: `url(/img/bridge.jpeg)`,
 		};

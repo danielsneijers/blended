@@ -9,7 +9,6 @@ class SlideStore extends Store {
     for(let i = 0; i < _slides.length; i++){
       console.log(_slides[i].id);
       if(_slides[i].id == id){
-        console.log(_slides[i]);
         return _slides[i];
       }
     }
@@ -33,6 +32,14 @@ AppDispatcher.register((payload) => {
 
       case SlideConstants.CREATE_SLIDE:
         _slides.push(payload.data);
+        _slideStore.emitChange();
+        break;
+
+      case SlideConstants.UPDATE_SLIDE:
+        console.log(payload.data);
+        // for(let i = 0; i < _slides.length; i++){
+        //   if(payload.data == _slides[i].id) _slides[i] ;
+        // }
         _slideStore.emitChange();
         break;
 

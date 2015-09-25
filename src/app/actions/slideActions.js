@@ -10,6 +10,10 @@ export default {
   	Api.post();
   },
 
+  updateSlide: (slide) => {
+    Api.put(slide);
+  },
+
   deleteSlide: (id) => {
     Api.delete(id);
   },

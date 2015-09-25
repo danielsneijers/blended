@@ -23,7 +23,7 @@ let databaseConnect = (callback) => {
 };
 
 const Api = {
-  
+
   get: (id) => {
   	console.log('%c Api / get ', 'background-color: #3498DB; color: white;');
     databaseConnect(() => {
@@ -62,7 +62,7 @@ const Api = {
           db.close();
         }
       };
-    }); 
+    });
   },
 
   post: (slide) => {
@@ -79,7 +79,6 @@ const Api = {
       transaction.onsuccess = (e) => {
         // TODO: create errorstore and put error
         console.log(e);
-        slide.id = e.target.result;
         AppDispatcher.dispatch({
           actionType: SlideConstants.CREATE_SLIDE,
           data: slide
@@ -90,14 +89,23 @@ const Api = {
   },
 
   put: (slide) => {
-    slide = {title: 'testslide'};
+    console.log('%c Api / put ', 'background-color: #3498DB; color: white;');
     databaseConnect(() => {
       let transaction = db.transaction(["slides"],"readwrite")
-                          .objectStore("slides")
-                          .put(slide);
+                        .objectStore("slides")
+                        .put(slide);
       transaction.onerror = (e) => {
-          // TODO: create errorstore and put error      
+          // TODO: create errorstore and put error
           console.log("Error");
+      };
+      transaction.onsuccess = (e) => {
+        // TODO: create errorstore and put error
+        console.log(e);
+        AppDispatcher.dispatch({
+          actionType: SlideConstants.UPDATE_SLIDE,
+          data: slide
+        });
+        db.close();
       };
     });
   },
@@ -128,7 +136,7 @@ const Api = {
       AppDispatcher.dispatch({
         actionType: SlideConstants.RESET,
         data: ''
-      });    
+      });
     };
     transaction.onerror = () => {
       // TODO: create errorstore and put error

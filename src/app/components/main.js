@@ -11,8 +11,7 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allSlides: [],
-			currentSlide: {}
+			allSlides: []
 		}
 	}
 	componentWillMount() {
@@ -63,16 +62,13 @@ class Main extends Component {
           </nav>
         </CSSTransitionGroup>
         <Overview allSlides={this.state.allSlides} />
-        <RouteHandler {...this.props} slide={this.state.currentSlide} />
+        <RouteHandler {...this.props} allSlides={this.state.allSlides} />
 	  	</div>);
 	}
 
 	// onChange
 	_onChange(){
-		this.setState({
-			allSlides: SlideStore.getAllSlides(),
-			currentSlide: SlideStore.getSlide(this.props.params.id)
-		});
+		this.setState({ allSlides: SlideStore.getAllSlides() });
 	}
 };
 

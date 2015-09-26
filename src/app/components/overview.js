@@ -10,9 +10,6 @@ const {addons: {CSSTransitionGroup}} = React;
 class Overview extends Component {
 
 	// Component lifecycle
-	constructor(props) {
-		super(props);
-	}
 	componentDidMount() {
     let overviewContainer = React.findDOMNode(this);
     Dragula([overviewContainer], {
@@ -20,7 +17,7 @@ class Overview extends Component {
     }).on('dragend', this.saveSortingOrder);
   }
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
+		//console.log(nextProps);
 	}
 
 	// Helpers

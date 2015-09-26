@@ -18,7 +18,7 @@ let databaseConnect = (callback) => {
   };
   req.onsuccess  = (e) => {
     db = e.target.result;
-    console.log("Success opening DB");
+    //console.log("Success opening DB");
     callback();
   }
 };
@@ -72,7 +72,7 @@ const Api = {
   },
 
   put: (slide) => {
-    console.log('%c Api / put ', 'background-color: #3498DB; color: white;');
+    console.log('%c Api / put ', 'background-color: #3498DB; color: white;', slide);
     databaseConnect(() => {
       let transaction = db.transaction(["slides"],"readwrite")
                         .objectStore("slides")

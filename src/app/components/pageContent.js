@@ -24,12 +24,13 @@ class PageContent extends Component {
 	componentDidMount() {
 		SlideActions.getAll();
 	}
+	componentWillReceiveProps(nextProps) {
+		this.isolateCurrentSlide(nextProps.params.id);
+	}
 	componentDidUpdate(prevProps, prevState) {
 		// TODO: extend this function to handle out of bounds routes
 		if(Object.keys(this.props.params).length === 0){
 			window.AppRouter.transitionTo('/slide/1');
-		} else {
-	  	this.isolateCurrentSlide(this.props.params.id);
 		}
 	}
 	componentWillUnmount() {
@@ -38,9 +39,9 @@ class PageContent extends Component {
 
 	// Helpers
 	isolateCurrentSlide(slideId) {
-		console.log('getslide', slideId);
-		// console.log('router? ',window.AppRouter);
-		//window.AppRouter.transitionTo('/slide/1');
+		for(let slide of this.state.allSlides){
+			if(slide.id == slideId) this.setState({ currentSlide: slide });
+		}
 	}
 
 	// Render
@@ -55,7 +56,7 @@ class PageContent extends Component {
 	// onChange
 	_onChange(){
 		this.setState({ allSlides: SlideStore.getAllSlides() });
-		console.log(this.state.allSlides);
+		this.isolateCurrentSlide(this.props.params.id);
 	}
 };
 

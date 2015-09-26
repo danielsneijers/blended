@@ -7,66 +7,36 @@ const {addons: {CSSTransitionGroup}} = React;
 
 class CommitList extends Component {
 
-	// Component lifecycle
-	constructor(props) {
-    super(props);
-    this.state = {
-    	slide: {},
-    	dirty: false
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-  	// if(!this.state.dirty && allSlides in nextProps)
-  	// 	this.setCurrentSlide(this.props.params.id, nextProps.allSlides);
-  }
-  componentDidMount() {
-  	console.log('did mount');
-  	//this.setCurrentSlide(this.props.params.id);
-	}
-	componentWillUnmount() {
-		SlideStore.removeChangeListener(this._onChange.bind(this));
-	}
-
   // Helpers
-  setCurrentSlide(id, allSlides) {
-  	console.log('set', allSlides);
-  	// allSlides.forEach((slide, index) => {
-  	// 	console.log('hoi');
-  	// 	console.log(slide, index);
-  	// });
-  }
-  setDirtyState(e) {
-  	this.setState({ dirty: true });
-  }
   saveSlideContent(property, e) {
-  	let optimisticUpdatedSlide = this.state.slide;
+  	let optimisticUpdatedSlide = this.props.slide;
   	optimisticUpdatedSlide[property] = e.currentTarget.innerHTML;
-  	this.setState({
-  		slide: optimisticUpdatedSlide,
-  		dirty: false
-  	})
   	SlideActions.updateSlide(optimisticUpdatedSlide);
   }
-
 
 	// Render
 	render() {
 
-		// console.log(this.state.slide);
+		console.log(this.props.slide);
 
-		let slide = this.props.slide;
-		let title = slide.title;
+		let slide = this.props.slide,
+				emtpySlide = Object.keys(slide).length === 0,
+				title = slide.title;
+
 		let styles = {
 		  backgroundImage: `url(/img/bridge.jpeg)`,
 		};
 
+		let containerClasses = Classnames('slide-container', {
+			hidden: emtpySlide
+		})
+
 		return (
 			<CSSTransitionGroup transitionName='fadeIn' transitionAppear={true} component='div'>
-				<div className='slide-container'>
+				<div className={containerClasses}>
 					<div id="active-slide" className="slide">
 						<div className='content' style={styles}>
 							<h1 contentEditable='true'
-								onFocus={this.setDirtyState.bind(this)}
 								onBlur={this.saveSlideContent.bind(this, 'title')}>
 									{title}
 							</h1>
@@ -75,10 +45,6 @@ class CommitList extends Component {
 				</div>
 	  	</CSSTransitionGroup>
 		);
-	}
-
-	_onChange() {
-		this.setState({ slide: SlideStore.getSlide(this.props.params.id) });
 	}
 
 };

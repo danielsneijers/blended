@@ -11,6 +11,7 @@ export default {
   },
 
   updateSlide: (slide) => {
+    console.log(slide);
     Api.put(slide);
   },
 

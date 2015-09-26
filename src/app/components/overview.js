@@ -22,49 +22,61 @@ class Overview extends Component {
     let overviewContainer = React.findDOMNode(this);
     Dragula([overviewContainer], {
     	mirrorContainer: overviewContainer
-    }).on('drop', () => this.saveSortingOrder(this.props.allSlides, document.getElementsByClassName('overview-item')));
+    }).on('drop', el => this.saveSortingOrder(this.props.allSlides, document.getElementsByClassName('overview-item'), el));
   }
 
 	// Helpers
-	saveSortingOrder(allSlides, renderedSlides) {
-		let slides = allSlides,
-				i = 1;
-				console.log(renderedSlides);
-		for(let slide of slides){
-			let renderedId = renderedSlides[i].attributes[1];
-			console.log(renderedSlides[i].attributes);
-			console.log(renderedId);
-			slide.position = i;
+	saveSortingOrder(allSlides, renderedSlides, el) {
+		let newSlides = [],
+				cleanRenderedSlides = this.cleanRenderedSlidesCollection(renderedSlides),
+				newIndexes = [],
+				i = 0;
+		for(let renderedSlide of cleanRenderedSlides){
+			newIndexes.push(parseInt(renderedSlide.getAttribute('id')));
+		}
+		console.log(newIndexes);
+		for(let slides in allSlides){
+			//TODO: check parseInt, something isn't working
+			console.log(allSlides[i].id);
+			let newPosition = newIndexes.indexOf(parseInt(allSlides[i].id));
+			newPosition++;
+			allSlides[i].position = newPosition;
 			i++;
 		}
-		SlideActions.updateSlide(slides);
-		console.log('save sorting order', slides);
+		console.log(newSlides);
+		SlideActions.updateAll(allSlides);
+		//window.AppRouter.transitionTo('/slide/1');
+	}
+	cleanRenderedSlidesCollection(renderedSlides) {
+		let cleanRenderedSlides = [];
+		[].forEach.call(renderedSlides, (el) => {
+    	if(!el.classList.contains('gu-mirror'))
+    		cleanRenderedSlides.push(el);
+		});
+		return cleanRenderedSlides;
 	}
 
 	// Render
 	render() {
-    console.log('%c overview render ', 'background-color: #E54D42; color: white;');
 
-		let slides = [];
+		let slides = [],
+				i = 1;
 
 		for(let slide of this.props.allSlides){
-			let url = `/slide/${slide.id}`;
-			let key = `slide-${slide.id}`;
+			let url = `/slide/${slide.position}`,
+					key = `slide-${slide.id}-${slide.position}`;
 			slides.push(
-				<div key={key} className='overview-item'>
+				<div key={key} id={slide.id} data-position={i} className='overview-item'>
 					<Link to={url}><SlidePreview slide={slide} /></Link>
 				</div>
 			);
+			i++;
 		};
 
 		return (
 			<div className='overview-container'>
 				{slides}
 	  	</div>);
-	}
-
-	_onChange(){
-		this.setState({ allSlides: SlideStore.getAllSlides() });
 	}
 };
 

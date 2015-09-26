@@ -40,7 +40,7 @@ class PageContent extends Component {
 	// Helpers
 	isolateCurrentSlide(slideId) {
 		for(let slide of this.state.allSlides){
-			if(slide.id == slideId) this.setState({ currentSlide: slide });
+			if(slide.position == slideId) this.setState({ currentSlide: slide });
 		}
 	}
 
@@ -55,7 +55,13 @@ class PageContent extends Component {
 
 	// onChange
 	_onChange(){
-		this.setState({ allSlides: SlideStore.getAllSlides() });
+		let slides = SlideStore.getAllSlides();
+		slides.sort(function(a, b) {
+		  return parseInt(a.position) - parseInt(b.position);
+		});
+		console.log(this.state.allSlides);
+		console.log(slides);
+		this.setState({ allSlides: slides });
 		this.isolateCurrentSlide(this.props.params.id);
 	}
 };

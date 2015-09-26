@@ -9,15 +9,13 @@ class CommitList extends Component {
 
   // Helpers
   saveSlideContent(property, e) {
-  	let optimisticUpdatedSlide = this.props.slide;
-  	optimisticUpdatedSlide[property] = e.currentTarget.innerHTML;
-  	SlideActions.updateSlide(optimisticUpdatedSlide);
+  	let slide = this.props.slide;
+  	slide[property] = e.currentTarget.innerHTML;
+  	SlideActions.updateSlide(slide);
   }
 
 	// Render
 	render() {
-
-		console.log(this.props.slide);
 
 		let slide = this.props.slide,
 				emtpySlide = Object.keys(slide).length === 0,

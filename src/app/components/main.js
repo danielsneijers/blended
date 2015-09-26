@@ -29,7 +29,8 @@ class Main extends Component {
 		}
 	}
 	handleCreate(e) {
-		SlideActions.createSlide();
+		let slidePosition = document.getElementsByClassName('overview-item').length + 1;
+		SlideActions.createSlide(slidePosition);
 	}
 	handleDeleteAll(e) {
 		SlideActions.deleteAll();

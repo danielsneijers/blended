@@ -6,15 +6,17 @@ export default {
   	Api.getAll();
   },
 
-  createSlide: () => {
-  	Api.post();
+  createSlide: (position) => {
+  	Api.post(position);
   },
 
   updateSlide: (slide) => {
-    Api.put(slide);
+    slide = [slide];
+    Api.put(slide, 1);
   },
   updateAll: (slides) => {
-    Api.putAll(slides);
+    length = slides.length;
+    Api.put(slides, length);
   },
 
 

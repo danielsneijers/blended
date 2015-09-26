@@ -13,24 +13,24 @@ let databaseConnect = (callback) => {
     console.log("Upgrading");
     db = e.target.result;
     let objectStore = db.createObjectStore("slides", { keyPath : "id", autoIncrement: true });
-
+    // let _objectStore = db.transaction(["slides"],"readwrite")
+    //                     .objectStore("slides");
+    // callback(_objectStore);
   };
   req.onsuccess  = (e) => {
     db = e.target.result;
-    //console.log("Success opening DB");
-    callback();
+    let _objectStore = db.transaction(["slides"],"readwrite")
+                        .objectStore("slides");
+    callback(_objectStore);
   }
 };
 
 const Api = {
 
   getAll: () => {
-    console.log('%c Api / get all ', 'background-color: #3498DB; color: white;');
-    databaseConnect(() => {
+    databaseConnect(objectStore => {
       let slides = [];
-      let transaction = db.transaction(["slides"],"readonly")
-                          .objectStore("slides")
-                          .openCursor();
+      let transaction = objectStore.openCursor();
       transaction.onsuccess = function(e) {
         let cursor = e.target.result;
         if (cursor) {
@@ -47,13 +47,10 @@ const Api = {
     });
   },
 
-  post: (slide) => {
-    slide = {title: 'Title', position: '1'};
-  	console.log('%c Api / post ', 'background-color: #3498DB; color: white;');
-    databaseConnect(() => {
-      let transaction = db.transaction(["slides"],"readwrite")
-                        .objectStore("slides")
-                        .add(slide);
+  post: (position) => {
+    let slide = {title: 'Title', position: position};
+    databaseConnect( objectStore => {
+      let transaction = objectStore.add(slide);
       transaction.onerror = (e) => {
           // TODO: create errorstore and put error
           console.log("Error");
@@ -70,58 +67,35 @@ const Api = {
     });
   },
 
-  put: (slide) => {
-    console.log('%c Api / put ', 'background-color: #3498DB; color: white;', slide);
-    databaseConnect(() => {
-      let transaction = db.transaction(["slides"],"readwrite")
-                        .objectStore("slides")
-                        .put(slide);
-      transaction.onerror = (e) => {
-        // TODO: create errorstore and put error
-        console.log("Error");
-      };
-      transaction.onsuccess = (e) => {
-        // TODO: create errorstore and put error
-        console.log(e);
-        AppDispatcher.dispatch({
-          actionType: SlideConstants.UPDATE_SLIDE,
-          data: slide
-        });
-        db.close();
-      };
-    });
-  },
-
-  putAll: (slides) => {
-    console.log('%c Api / put ', 'background-color: #3498DB; color: white;', slide);
-    databaseConnect(() => {
-      let transaction = db.transaction(["slides"],"readwrite")
-                        .objectStore("slides")
-                        .put(slide);
-      transaction.onerror = (e) => {
-        // TODO: create errorstore and put error
-        console.log("Error");
-      };
-      transaction.onsuccess = (e) => {
-        // TODO: create errorstore and put error
-        console.log(e);
-        AppDispatcher.dispatch({
-          actionType: SlideConstants.UPDATE_SLIDE,
-          data: slide
-        });
-        db.close();
-      };
+  put: (slides, length) => {
+    console.log(slides);
+    databaseConnect( objectStore => {
+      let i = 0;
+      for(let slide of slides){
+        let transaction = objectStore.put(slide);
+        transaction.onerror = (e) => {
+          // TODO: create errorstore and put error
+          console.log("Error");
+        };
+        transaction.onsuccess = (e) => {
+          // TODO: create errorstore and put error
+          i++;
+          if(i == length){
+            console.info('dispatch');
+            AppDispatcher.dispatch({
+              actionType: SlideConstants.UPDATE_SLIDE,
+              data: slide
+            });
+            db.close();
+          }
+        }
+      }
     });
   },
 
   delete: (id) => {
-    console.log(id);
-  	console.log('%c Api / delete ', 'background-color: #3498DB; color: white;');
-    databaseConnect(() => {
-      console.log(id);
-      let transaction = db.transaction(["slides"],"readwrite")
-                          .objectStore("slides")
-                          .delete(id);
+    databaseConnect( objectStore => {
+      let transaction = objectStore.delete(id);
       transaction.onsuccess = (e) => {
         AppDispatcher.dispatch({
           actionType: SlideConstants.DELETE_SLIDE,
@@ -133,7 +107,6 @@ const Api = {
   },
 
   reset: () => {
-  	console.log('%c Api / reset ', 'background-color: #3498DB; color: white;');
     let transaction = indexedDB.deleteDatabase('presentation');
     transaction.onsuccess = () => {
       console.log("Deleted database successfully");

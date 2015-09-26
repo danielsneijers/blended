@@ -25,20 +25,14 @@ class CommitList extends Component {
 		  backgroundImage: `url(/img/bridge.jpeg)`,
 		};
 
-		let containerClasses = Classnames('slide-container', {
-			hidden: emtpySlide
-		})
-
 		return (
-			<CSSTransitionGroup transitionName='fadeIn' transitionAppear={true} component='div'>
-				<div className={containerClasses}>
-					<div id="active-slide" className="slide">
-						<div className='content' style={styles}>
-							<h1 contentEditable='true'
-								onBlur={this.saveSlideContent.bind(this, 'title')}>
-									{title}
-							</h1>
-						</div>
+			<CSSTransitionGroup className='slide-container' transitionName='fadeIn' transitionAppear={true} component='div'>
+				<div className="slide">
+					<div className='content' style={styles}>
+						<h1 contentEditable='true'
+							onBlur={this.saveSlideContent.bind(this, 'title')}
+							dangerouslySetInnerHTML={{__html: title}} >
+						</h1>
 					</div>
 				</div>
 	  	</CSSTransitionGroup>

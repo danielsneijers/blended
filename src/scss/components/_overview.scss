@@ -1,23 +1,22 @@
 .overview-container {
-	position: absolute;
-	// TODO: make fix for this absolute height
-	top: 74px;
-	left: 0;
+	position: relative;
+	flex: 0 0 $sidebarWidth;
+	display: inline-block;
 	margin: 0;
-	width: $sidebarWidth;
-	height: calc(100vh - 74px);
+	height: calc(100vh - $toolbarHeight);
 	overflow: hidden;
-	padding: 0 $padding;
+	padding: $padding;
 	background-color: $off-white;
 
 	.overview-item {
 		margin-bottom: 1rem;
 		transition: transform 0.15s ease, box-shadow 0.15s ease;
+		font-size: 0.2rem;
 
 		&:hover {
 			cursor: pointer;
-			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-			transform: translateY(-3px);
+			box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+			transform:  scale(1.05);
 			transition: transform 0.15s ease, box-shadow 0.15s ease;
 		}
 

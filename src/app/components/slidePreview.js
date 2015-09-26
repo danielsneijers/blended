@@ -25,12 +25,12 @@ class CommitList extends Component {
 
 		let title =  this.props.slide.title;
 		let styles = {
-		  backgroundImage: `url(/img/building.jpeg)`,
+		  //backgroundImage: `url(/img/building.jpeg)`,
 		};
 
 		return (
 				<div className='content' style={styles}>
-					<div>{title}</div>
+					<h1 dangerouslySetInnerHTML={{__html: title}}></h1>
 					<button onClick={this.handleDelete.bind(this)}>delete</button>
 				</div>
 		);

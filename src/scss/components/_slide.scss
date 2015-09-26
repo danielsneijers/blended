@@ -1,0 +1,45 @@
+$offset: $sidebarWidth + $padding + $margin;
+
+.slide-container {
+	z-index: 1;
+	top: 0;
+	left: $offset;
+	width: 100%;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	padding: 0 1rem 0 0;
+}
+.slide {
+	@include aspect-ratio(16, 9);
+	max-height: 100vh;
+	width: 100%;
+	box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
+	//transition: transform 0.15s ease, box-shadow 0.15s ease;
+	//overflow: hidden;
+	padding: 1rem;
+
+	h1 {
+		//font-family: 'Open sans';
+		text-transform: uppercase;
+		color: $blue;
+		text-align: center;
+		// mix-blend-mode: multiply;
+		// white-space: pre-wrap;
+
+		* {
+			font-size: 1em;
+			font-weight: inherit;
+		}
+	}
+}
+
+.content {
+	background-size: cover;
+	background-position: center;
+	background-color: white;
+
+	[contenteditable='true'] {
+		outline: none;
+	}
+}

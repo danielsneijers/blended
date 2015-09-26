@@ -1,7 +1,7 @@
 import React from 'react';
-import Main from './components/main';
+import Router from 'react-router';
+import Routes from './routes';
 
-React.render(
-	<Main />,
-	document.getElementById('app')
-);
+window.AppRouter = Router.run(Routes, (Root, state) => {
+  React.render(<Root {...state} />, document.getElementById('app'));
+});

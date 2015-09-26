@@ -13,8 +13,7 @@ let databaseConnect = (callback) => {
     console.log("Upgrading");
     db = e.target.result;
     let objectStore = db.createObjectStore("slides", { keyPath : "id", autoIncrement: true });
-    objectStore.createIndex("title", "title", { unique: false });
-    objectStore.createIndex("position", "position", { unique: false });
+
   };
   req.onsuccess  = (e) => {
     db = e.target.result;
@@ -78,8 +77,30 @@ const Api = {
                         .objectStore("slides")
                         .put(slide);
       transaction.onerror = (e) => {
-          // TODO: create errorstore and put error
-          console.log("Error");
+        // TODO: create errorstore and put error
+        console.log("Error");
+      };
+      transaction.onsuccess = (e) => {
+        // TODO: create errorstore and put error
+        console.log(e);
+        AppDispatcher.dispatch({
+          actionType: SlideConstants.UPDATE_SLIDE,
+          data: slide
+        });
+        db.close();
+      };
+    });
+  },
+
+  putAll: (slides) => {
+    console.log('%c Api / put ', 'background-color: #3498DB; color: white;', slide);
+    databaseConnect(() => {
+      let transaction = db.transaction(["slides"],"readwrite")
+                        .objectStore("slides")
+                        .put(slide);
+      transaction.onerror = (e) => {
+        // TODO: create errorstore and put error
+        console.log("Error");
       };
       transaction.onsuccess = (e) => {
         // TODO: create errorstore and put error

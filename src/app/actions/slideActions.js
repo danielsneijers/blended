@@ -11,9 +11,12 @@ export default {
   },
 
   updateSlide: (slide) => {
-    console.log(slide);
     Api.put(slide);
   },
+  updateAll: (slides) => {
+    Api.putAll(slides);
+  },
+
 
   deleteSlide: (id) => {
     Api.delete(id);

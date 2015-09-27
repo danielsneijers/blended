@@ -46,21 +46,29 @@ class PageContent extends Component {
 
 	// Render
 	render() {
+
+		let SlideKey = `slide-${this.state.currentSlide.id}-${this.state.currentSlide.position}`;
+
+		if(Object.keys(this.state.currentSlide).length === 0){
+			console.info('yolo')
+		}
+
 		return (
 			<div className='page-content'>
         <Overview allSlides={this.state.allSlides} />
-        <SlideContainer slide={this.state.currentSlide} />
+        <div id='slide-container'>
+        	<SlideContainer key={SlideKey} slide={this.state.currentSlide} />
+        </div>
 	  	</div>);
 	}
 
 	// onChange
 	_onChange(){
 		let slides = SlideStore.getAllSlides();
+		this.setState({ currentSlide: {} });
 		slides.sort(function(a, b) {
 		  return parseInt(a.position) - parseInt(b.position);
 		});
-		console.log(this.state.allSlides);
-		console.log(slides);
 		this.setState({ allSlides: slides });
 		this.isolateCurrentSlide(this.props.params.id);
 	}

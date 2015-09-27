@@ -1,6 +1,6 @@
 $offset: $sidebarWidth + $padding + $margin;
 
-.slide-container {
+#slide-container {
 	z-index: 1;
 	top: 0;
 	left: $offset;
@@ -9,6 +9,10 @@ $offset: $sidebarWidth + $padding + $margin;
   	justify-content: center;
   	align-items: center;
   	padding: 0 1rem 0 0;
+
+  	&:fullscreen {
+  		padding: 0;
+  	}
 }
 .slide {
 	@include aspect-ratio(16, 9);

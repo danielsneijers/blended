@@ -7,6 +7,10 @@ const {addons: {CSSTransitionGroup}} = React;
 
 class CommitList extends Component {
 
+	componentDidUpdate() {
+		console.info('did update!')
+	}
+
   // Helpers
   saveSlideContent(property, e) {
   	let slide = this.props.slide;
@@ -26,15 +30,15 @@ class CommitList extends Component {
 		};
 
 		return (
-			<CSSTransitionGroup className='slide-container' transitionName='fadeIn' transitionAppear={true} component='div'>
-				<div className="slide">
+			<CSSTransitionGroup className="slide" transitionName='fadeIn' transitionAppear={true} component='div'>
+
 					<div className='content' style={styles}>
 						<h1 contentEditable='true'
 							onBlur={this.saveSlideContent.bind(this, 'title')}
 							dangerouslySetInnerHTML={{__html: title}} >
 						</h1>
 					</div>
-				</div>
+
 	  	</CSSTransitionGroup>
 		);
 	}

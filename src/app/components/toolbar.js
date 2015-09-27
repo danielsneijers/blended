@@ -22,7 +22,7 @@ class Toolbar extends Component {
 	switchToFullScreen(e) {
 		e.preventDefault();
 
-		let elem = document.getElementById("active-slide");
+		let elem = document.getElementById('slide-container');
 
 		if (elem.requestFullscreen) {
 		  elem.requestFullscreen();
@@ -40,7 +40,8 @@ class Toolbar extends Component {
 		window.AppRouter.transitionTo(`/slide/${route}`);
 	}
 	handleFullScreenNav(direction) {
-		if( window.innerHeight == screen.height) this.navigateTo(direction);
+		let fullscreenEnabled = !window.screenTop && !window.screenY;
+		if(fullscreenEnabled) this.navigateTo(direction);
 	}
 	handleCreate(e) {
 		let slidePosition = document.getElementsByClassName('overview-item').length + 1;

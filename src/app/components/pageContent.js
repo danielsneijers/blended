@@ -37,6 +37,12 @@ class PageContent extends Component {
 		SlideStore.removeChangeListener(this._onChange.bind(this));
 	}
 
+	// Event handlers
+	handleContainerClick(e) {
+		let fullscreenEnabled = !window.screenTop && !window.screenY;
+		if(fullscreenEnabled) this.props.navigateTo('next');
+	}
+
 	// Helpers
 	isolateCurrentSlide(slideId) {
 		for(let slide of this.state.allSlides){
@@ -56,7 +62,7 @@ class PageContent extends Component {
 		return (
 			<div className='page-content'>
         <Overview allSlides={this.state.allSlides} />
-        <div id='slide-container'>
+        <div id='slide-container' onClick={this.handleContainerClick.bind(this)}>
         	<SlideContainer key={SlideKey} slide={this.state.currentSlide} />
         </div>
 	  	</div>);
@@ -64,8 +70,9 @@ class PageContent extends Component {
 
 	// onChange
 	_onChange(){
-		let slides = SlideStore.getAllSlides();
+		// Current slide needs to be empty for 'leave' animation
 		this.setState({ currentSlide: {} });
+		let slides = SlideStore.getAllSlides();
 		slides.sort(function(a, b) {
 		  return parseInt(a.position) - parseInt(b.position);
 		});

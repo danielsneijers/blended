@@ -12,9 +12,11 @@ $offset: $sidebarWidth + $padding + $margin;
 
   	&:fullscreen {
   		padding: 0;
+  		cursor: none;
   	}
 }
-.slide {
+.slide,
+.slide-preview {
 	@include aspect-ratio(16, 9);
 	max-height: 100vh;
 	width: 100%;
@@ -26,7 +28,7 @@ $offset: $sidebarWidth + $padding + $margin;
 	h1 {
 		//font-family: 'Open sans';
 		text-transform: uppercase;
-		color: $blue;
+		color: $grey;
 		text-align: center;
 		// mix-blend-mode: multiply;
 		// white-space: pre-wrap;

@@ -4,31 +4,24 @@
 	display: inline-block;
 	margin: 0;
 	height: calc(100vh - $toolbarHeight);
-	overflow: hidden;
+	overflow: scroll;
 	padding: $padding;
 	background-color: $off-white;
+}
+.overview-item {
+	margin-bottom: 1rem;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	font-size: 0.2rem;
+	overflow: hidden;
 
-	.overview-item {
-		margin-bottom: 1rem;
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+		transform:  scale(1.05);
 		transition: transform 0.15s ease, box-shadow 0.15s ease;
-		font-size: 0.2rem;
 
-		&:hover {
-			cursor: pointer;
-			box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
-			transform:  scale(1.05);
-			transition: transform 0.15s ease, box-shadow 0.15s ease;
-		}
-
-		a {
-			@include aspect-ratio(16, 9);
-			display: block;
-			height: 100%;
-			color: white;
-		}
-
-		button {
-			color: $grey;
+		.button-triangle {
+			opacity: 1;
 		}
 	}
 }

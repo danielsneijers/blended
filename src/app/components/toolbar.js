@@ -18,6 +18,19 @@ class Toolbar extends Component {
 		Key('down, right', () => this.handleFullScreenNav('next'));
 	}
 
+	// Event handlers
+	handleFullScreenNav(direction) {
+		let fullscreenEnabled = !window.screenTop && !window.screenY;
+		if(fullscreenEnabled) this.props.navigateTo(direction);
+	}
+	handleCreate(e) {
+		let slidePosition = document.getElementsByClassName('overview-item').length + 1;
+		SlideActions.createSlide(slidePosition);
+	}
+	handleDeleteAll(e) {
+		SlideActions.deleteAll();
+	}
+
 	// Helpers
 	switchToFullScreen(e) {
 		e.preventDefault();
@@ -34,35 +47,35 @@ class Toolbar extends Component {
 		  elem.webkitRequestFullscreen();
 		}
 	}
-	navigateTo(direction) {
-		let route = this.props.params.id;
-		direction == 'next' ? route++ : route--;
-		window.AppRouter.transitionTo(`/slide/${route}`);
-	}
-	handleFullScreenNav(direction) {
-		let fullscreenEnabled = !window.screenTop && !window.screenY;
-		if(fullscreenEnabled) this.navigateTo(direction);
-	}
-	handleCreate(e) {
-		let slidePosition = document.getElementsByClassName('overview-item').length + 1;
-		SlideActions.createSlide(slidePosition);
-	}
-	handleDeleteAll(e) {
-		SlideActions.deleteAll();
-	}
 
 	// Render
 	render() {
 		return (
       <CSSTransitionGroup transitionName='fadeIn' transitionAppear={true}>
-      	<nav className='navigation' role='navigation'>
+      	<div className='toolbar'>
       		<h4>Blended</h4>
-      		<button className='button' onClick={this.navigateTo.bind(this, 'prev')}>prev</button>
-        	<button className='button' onClick={this.switchToFullScreen}>play</button>
-        	<button className='button' onClick={this.navigateTo.bind(this, 'next')}>next</button>
-        	<button className='button' onClick={this.handleCreate}>create</button>
-        	<button className='button' onClick={this.handleDeleteAll}>delete all</button>
-        </nav>
+      		<nav className='transport-buttons'>
+      			<button className='button' onClick={this.props.navigateTo.bind(this, 'first')}>
+      				<img className='icon' src='img/icon-first.svg' alt='First icon' />
+      			</button>
+	      		<button className='button' onClick={this.props.navigateTo.bind(this, 'prev')}>
+      				<img className='icon' src='img/icon-back.svg' alt='Back icon' />
+	      		</button>
+	        	<button className='button' onClick={this.switchToFullScreen}>
+      				<img className='icon' src='img/icon-play.svg' alt='Play icon' />
+	        	</button>
+	        	<button className='button mirrored' onClick={this.props.navigateTo.bind(this, 'next')}>
+      				<img className='icon' src='img/icon-back.svg' alt='Forward icon' />
+	        	</button>
+	        	<button className='button mirrored' onClick={this.props.navigateTo.bind(this, 'last')}>
+      				<img className='icon' src='img/icon-first.svg' alt='Last icon' />
+	        	</button>
+        	</nav>
+        	<div className='crud-buttons'>
+        		<button className='button' onClick={this.handleCreate}>create</button>
+        		<button className='button' onClick={this.handleDeleteAll}>delete all</button>
+        	</div>
+        </div>
       </CSSTransitionGroup>);
 	}
 };

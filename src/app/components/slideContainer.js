@@ -26,7 +26,7 @@ class CommitList extends Component {
 				title = slide.title;
 
 		let styles = {
-		  backgroundImage: `url(/img/bridge.jpeg)`,
+		  backgroundImage: `url(/img/ferris-wheel.jpeg)`,
 		};
 
 		return (

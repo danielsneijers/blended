@@ -25,21 +25,21 @@ class CommitList extends Component {
 
 		let title =  this.props.slide.title;
 		let styles = {
-		  //backgroundImage: `url(/img/building.jpeg)`,
+		  backgroundImage: `url(img/bridge.jpeg)`,
 		};
 
 		return (
+			<CSSTransitionGroup className="slide-preview" transitionName='fadeIn' transitionAppear={true} component='div'>
 				<div className='content' style={styles}>
-					<h1 dangerouslySetInnerHTML={{__html: title}}></h1>
-					<button onClick={this.handleDelete.bind(this)}>delete</button>
+					<button className='button button-triangle' onClick={this.handleDelete.bind(this)}>
+						<img className='icon' src='img/icon-delete.svg' alt='Delete icon' />
+					</button>
+					<h1 dangerouslySetInnerHTML={{__html: title}} ></h1>
 				</div>
+			</CSSTransitionGroup>
 		);
 	}
 
-	// onChange
-	_onChange(){
-		// this.setState({ commits: CommitStore.getCommits() });
-	}
 };
 
 export default CommitList;

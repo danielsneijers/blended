@@ -62,7 +62,7 @@ class Toolbar extends Component {
       				<img className='icon' src='img/icon-back.svg' alt='Back icon' />
 	      		</button>
 	        	<button className='button' onClick={this.switchToFullScreen}>
-      				<img className='icon' src='img/icon-play.svg' alt='Play icon' />
+      				<img className='icon play-icon' src='img/icon-play.svg' alt='Play icon' />
 	        	</button>
 	        	<button className='button mirrored' onClick={this.props.navigateTo.bind(this, 'next')}>
       				<img className='icon' src='img/icon-back.svg' alt='Forward icon' />

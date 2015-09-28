@@ -2,18 +2,15 @@ import React, { Component } from 'react/addons';
 import Classnames from 'classnames';
 import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
+import TitleSlide from './slide-types/titleSlide'
+import SingleSlide from './slide-types/singleSlide'
 
 const {addons: {CSSTransitionGroup}} = React;
 
-class CommitList extends Component {
+class SlideContainer extends Component {
 
-	componentDidUpdate() {
-		console.info('did update!')
-	}
-
-  // Helpers
-  saveSlideContent(property, e) {
-  	let slide = this.props.slide;
+  // Event listeners
+  saveSlideContent(property, slide, e) {
   	slide[property] = e.currentTarget.innerHTML;
   	SlideActions.updateSlide(slide);
   }
@@ -21,28 +18,27 @@ class CommitList extends Component {
 	// Render
 	render() {
 
-		let slide = this.props.slide,
-				emtpySlide = Object.keys(slide).length === 0,
-				title = slide.title;
+		let slide;
 
-		let styles = {
-		  backgroundImage: `url(/img/ferris-wheel.jpeg)`,
-		};
+		switch(this.props.slide.type){
+			case 'title':
+				slide = (<TitleSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} />);
+				break;
+			case 'single':
+				slide = (<SingleSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} />);
+				break;
+			case 'split':
+				slide = (<SplitSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} />);
+				break;
+		}
 
 		return (
 			<CSSTransitionGroup className="slide" transitionName='fadeIn' transitionAppear={true} component='div'>
-
-					<div className='content' style={styles}>
-						<h1 contentEditable='true'
-							onBlur={this.saveSlideContent.bind(this, 'title')}
-							dangerouslySetInnerHTML={{__html: title}} >
-						</h1>
-					</div>
-
+				{slide}
 	  	</CSSTransitionGroup>
 		);
 	}
 
 };
 
-export default CommitList;
+export default SlideContainer;

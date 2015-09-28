@@ -7,7 +7,12 @@ export default {
   },
 
   createSlide: (position) => {
-  	Api.post(position);
+    let slide = {
+      title: 'Title',
+      position: position,
+      type: 'title'
+    };
+  	Api.post(slide);
   },
 
   updateSlide: (slide) => {

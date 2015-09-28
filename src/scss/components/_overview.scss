@@ -4,9 +4,13 @@
 	display: inline-block;
 	margin: 0;
 	height: calc(100vh - $toolbarHeight);
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	padding: $padding;
 	background-color: $off-white;
+	&::-webkit-scrollbar {
+    	display: none;
+	}
 }
 .overview-item {
 	margin-bottom: 1rem;

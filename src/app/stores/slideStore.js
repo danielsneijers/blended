@@ -29,6 +29,7 @@ AppDispatcher.register((payload) => {
 
       case SlideConstants.UPDATE_SLIDE:
         console.log(payload.data);
+        console.log(_slides);
         // for(let i = 0; i < _slides.length; i++){
         //   if(payload.data == _slides[i].id) _slides[i] ;
         // }

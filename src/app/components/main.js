@@ -29,6 +29,10 @@ class Main extends Component {
 		window.AppRouter.transitionTo(`/slide/${route}`);
 	}
 
+	testmethod(param) {
+		return param;
+	}
+
 	// Render
 	render() {
 		return (

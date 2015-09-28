@@ -55,10 +55,6 @@ class PageContent extends Component {
 
 		let SlideKey = `slide-${this.state.currentSlide.id}-${this.state.currentSlide.position}`;
 
-		if(Object.keys(this.state.currentSlide).length === 0){
-			console.info('yolo')
-		}
-
 		return (
 			<div className='page-content'>
         <Overview allSlides={this.state.allSlides} />

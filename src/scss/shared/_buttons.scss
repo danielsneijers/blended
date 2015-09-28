@@ -55,7 +55,15 @@ $buttonHeight: 2.125rem;
 		position: relative;
 		height: $buttonHeight;
 		width: $buttonHeight;
-		border-radius: 50%;
+		background-color: $green;
+		//border-radius: 50%;
+		border-radius: 0;
+		margin-right: 1px;
+
+		&:first-of-type,
+		&:last-of-type {
+			border-radius: 3px 0 0 3px;
+		}
 	}
 
 	.icon {
@@ -68,5 +76,11 @@ $buttonHeight: 2.125rem;
 		width: auto;
 		margin: 0 auto;
 		padding-right: 0.1rem;
+	}
+	.play-icon {
+		width: 1.2rem;
+		height: 1.2rem;
+		top: ($buttonHeight - 1.2)/2;
+		left: 0.3rem;
 	}
 }

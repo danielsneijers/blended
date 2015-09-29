@@ -10,6 +10,7 @@ const {addons: {CSSTransitionGroup}} = React;
 
 class SlideContainer extends Component {
 
+	// Init
 	constructor(props) {
 		super(props);
 		this.state = {

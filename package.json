@@ -6,7 +6,8 @@
   "scripts": {
     "start": "gulp",
     "test": "jest",
-    "e2e": "gulp dist && ./node_modules/protractor/bin/protractor ./spec/protractor.conf.js --verbose"
+    "build": "gulp dist",
+    "e2e": "./node_modules/protractor/bin/protractor ./spec/protractor.conf.js --verbose"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",

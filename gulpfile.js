@@ -5,11 +5,10 @@ var path = require('path');
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
-var rimraf = require('rimraf');
 var Server = require('karma').Server;
 
 gulp.task('default', ['copy', 'webpack-dev-server']);
-gulp.task('dist', ['clean', 'copy', 'webpack:build']);
+gulp.task('dist', ['copy', 'webpack:build']);
 gulp.task('serve', ['dist', 'server']);
 
 gulp.task("webpack-dev-server", function(callback) {
@@ -62,11 +61,6 @@ gulp.task("webpack:build", function(callback) {
 		}));
 		callback();
 	});
-});
-
-gulp.task('clean', function() {
-	return gulp.src('./dist/**/*.*', { read: false }) // much faster
-  	.pipe(rimraf());
 });
 
 gulp.task('copy', function(){

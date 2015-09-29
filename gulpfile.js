@@ -68,7 +68,7 @@ gulp.task('copy', function(){
 
 gulp.task('server', function() {
   connect.server({
-  	port: 3000,
+  	port: 8080,
   	root: 'dist',
   });
 });

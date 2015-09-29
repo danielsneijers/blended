@@ -30,18 +30,9 @@ $offset: $sidebarWidth + $padding + $margin;
 	overflow: hidden;
 	padding: 1rem;
 
-	h1 {
-		//font-family: 'Open sans';
-		text-transform: uppercase;
-		color: $grey;
-		text-align: center;
-		// mix-blend-mode: multiply;
-		// white-space: pre-wrap;
-
-		* {
-			font-size: 1em;
-			font-weight: inherit;
-		}
+	h1 * {
+		font-size: 1em;
+		font-weight: inherit;
 	}
 
 	.options-button {

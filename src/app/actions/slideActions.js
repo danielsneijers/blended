@@ -11,7 +11,11 @@ export default {
       title: 'Title',
       position: position,
       type: 'title',
-      textAlign: 'center'
+      textAlign: 'center',
+      backgroundColor: '#FFFFFF',
+      backgroundUrl: '',
+      backgroundColor2: '#FFFFFF',
+      backgroundUrl2: ''
     };
   	Api.post(slide);
   },

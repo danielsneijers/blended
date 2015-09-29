@@ -16,14 +16,15 @@ class TitleSlide extends Component {
 	// Render
 	render() {
 
-		console.log(this.props.slideContent)
-
 		let slide = this.props.slideContent,
 				emptySlide = Object.keys(slide).length === 0,
 				title = slide.title;
 
 		let styles = {
-		  backgroundImage: `url(/img/building.jpeg)`,
+			textAlign: slide.textAlign,
+			color: slide.color,
+			backgroundColor: slide.backgroundColor,
+		  backgroundImage: slide.backgroundUrl,
 		};
 
 		return (

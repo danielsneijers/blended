@@ -23,9 +23,14 @@ class CommitList extends Component {
 	// Render
 	render() {
 
-		let title =  this.props.slide.title;
+		let slide = this.props.slide,
+				title =  this.props.slide.title;
+
 		let styles = {
-		  backgroundImage: `url(img/bridge.jpeg)`,
+			textAlign: slide.textAlign,
+			color: slide.color,
+			backgroundColor: slide.backgroundColor,
+		  backgroundImage: slide.backgroundUrl,
 		};
 
 		return (

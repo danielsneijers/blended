@@ -13,8 +13,13 @@ $offset: $sidebarWidth + $padding + $margin;
   	&:fullscreen {
   		padding: 0;
   		cursor: none;
+
+  		.options-button {
+  			display: none;
+  		}
   	}
 }
+
 .slide,
 .slide-preview {
 	@include aspect-ratio(16, 9);
@@ -22,7 +27,7 @@ $offset: $sidebarWidth + $padding + $margin;
 	width: 100%;
 	box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
 	//transition: transform 0.15s ease, box-shadow 0.15s ease;
-	//overflow: hidden;
+	overflow: hidden;
 	padding: 1rem;
 
 	h1 {
@@ -37,6 +42,10 @@ $offset: $sidebarWidth + $padding + $margin;
 			font-size: 1em;
 			font-weight: inherit;
 		}
+	}
+
+	.options-button {
+		opacity: 1!important;
 	}
 }
 

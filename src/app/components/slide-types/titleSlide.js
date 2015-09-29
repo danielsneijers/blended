@@ -8,8 +8,9 @@ class TitleSlide extends Component {
 
 	// Event listeners
 	handleOnBlur(property, e) {
-		let slide = this.props.slideContent;
-		this.props.saveSlideContent(property, slide, e);
+		let value = e.currentTarget.innerHTML,
+				slide = this.props.slideContent;
+		this.props.saveSlideContent(property, value, slide);
 	}
 
 	// Render

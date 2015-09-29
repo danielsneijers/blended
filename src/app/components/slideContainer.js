@@ -2,16 +2,31 @@ import React, { Component } from 'react/addons';
 import Classnames from 'classnames';
 import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
-import TitleSlide from './slide-types/titleSlide'
-import SingleSlide from './slide-types/singleSlide'
+import SlideOptions from './slideOptions';
+import TitleSlide from './slide-types/titleSlide';
+import SingleSlide from './slide-types/singleSlide';
 
 const {addons: {CSSTransitionGroup}} = React;
 
 class SlideContainer extends Component {
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			optionsActive: false
+		}
+	}
+
   // Event listeners
-  saveSlideContent(property, slide, e) {
-  	slide[property] = e.currentTarget.innerHTML;
+  handleEditButtonClick(e) {
+  	e.preventDefault();
+  	this.setState({
+  		optionsActive: this.state.optionsActive ? false : true
+  	});
+  }
+  // Helpers
+  saveSlideContent(property, value, slide) {
+  	slide[property] = value;
   	SlideActions.updateSlide(slide);
   }
 
@@ -35,6 +50,10 @@ class SlideContainer extends Component {
 		return (
 			<CSSTransitionGroup className="slide" transitionName='fadeIn' transitionAppear={true} component='div'>
 				{slide}
+				<SlideOptions currentSlide={this.props.slide} optionsActive={this.state.optionsActive} />
+				<button className='button button-triangle button-triangle-large options-button' onClick={this.handleEditButtonClick.bind(this)}>
+					<img className='icon' src='img/icon-setting.svg' alt='Settings icon' />
+				</button>
 	  	</CSSTransitionGroup>
 		);
 	}

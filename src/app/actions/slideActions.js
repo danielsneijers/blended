@@ -10,7 +10,8 @@ export default {
     let slide = {
       title: 'Title',
       position: position,
-      type: 'title'
+      type: 'title',
+      textAlign: 'center'
     };
   	Api.post(slide);
   },

@@ -31,7 +31,7 @@ class CommitList extends Component {
 		return (
 			<CSSTransitionGroup className="slide-preview" transitionName='fadeIn' transitionAppear={true} component='div'>
 				<div className='content' style={styles}>
-					<button className='button button-triangle' onClick={this.handleDelete.bind(this)}>
+					<button className='button button-triangle button-danger' onClick={this.handleDelete.bind(this)}>
 						<img className='icon' src='img/icon-delete.svg' alt='Delete icon' />
 					</button>
 					<h1 dangerouslySetInnerHTML={{__html: title}} ></h1>

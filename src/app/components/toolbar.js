@@ -72,8 +72,8 @@ class Toolbar extends Component {
 	        	</button>
         	</nav>
         	<div className='crud-buttons'>
-        		<button className='button' onClick={this.handleCreate}>create</button>
-        		<button className='button' onClick={this.handleDeleteAll}>delete all</button>
+        		<button className='button' onClick={this.handleCreate}>New Slide</button>
+        		<button className='button button-danger' onClick={this.handleDeleteAll}>Delete all</button>
         	</div>
         </div>
       </CSSTransitionGroup>);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react/addons';
 import { Link } from 'react-router';
 import Dragula from 'react-dragula';
-import SlideActions from '../actions/slideActions.js';
+import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
 import SlidePreview from './slidePreview';
 

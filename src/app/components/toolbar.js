@@ -1,7 +1,7 @@
 import React, { Component } from 'react/addons';
 import Key from 'keymaster';
-import SlideActions from '../actions/slideActions.js';
-import PageContent from '../components/pageContent.js';
+import SlideActions from '../actions/slideActions';
+import PageContent from '../components/pageContent';
 
 class Toolbar extends Component {
 

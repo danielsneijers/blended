@@ -1,8 +1,8 @@
 import React, { Component } from 'react/addons';
-import SlideActions from '../actions/slideActions.js';
+import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
-import Overview from '../components/overview.js';
-import SlideContainer from '../components/slideContainer.js';
+import Overview from '../components/overview';
+import SlideContainer from '../components/slideContainer';
 
 class PageContent extends Component {
 

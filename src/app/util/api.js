@@ -1,5 +1,5 @@
-import AppDispatcher from '../dispatcher/appDispatcher.js';
-import SlideConstants from '../constants/slideConstants.js';
+import AppDispatcher from '../dispatcher/appDispatcher';
+import SlideConstants from '../constants/slideConstants';
 
 let db;
 

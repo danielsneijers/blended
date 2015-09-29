@@ -38,8 +38,6 @@ class SlideContainer extends Component {
 
 		let slide;
 
-		console.log('render');
-
 		switch(this.props.slide.type){
 			case 'title':
 				slide = (<TitleSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} />);

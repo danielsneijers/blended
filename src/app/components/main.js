@@ -1,8 +1,8 @@
 import React, { Component } from 'react/addons';
 import { RouteHandler } from 'react-router';
-import SlideActions from '../actions/slideActions.js';
-import Toolbar from './toolbar.js'
-import PageContent from './pageContent.js';
+import SlideActions from '../actions/slideActions';
+import Toolbar from './toolbar'
+import PageContent from './pageContent';
 
 class Main extends Component {
 

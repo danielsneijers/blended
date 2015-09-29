@@ -3,8 +3,6 @@ import Key from 'keymaster';
 import SlideActions from '../actions/slideActions.js';
 import PageContent from '../components/pageContent.js';
 
-const {addons: {CSSTransitionGroup}} = React;
-
 class Toolbar extends Component {
 
 	// Init
@@ -51,32 +49,30 @@ class Toolbar extends Component {
 	// Render
 	render() {
 		return (
-      <CSSTransitionGroup transitionName='fadeIn' transitionAppear={true}>
-      	<div className='toolbar'>
-      		<h4>Blended</h4>
-      		<nav className='transport-buttons'>
-      			<button className='button' onClick={this.props.navigateTo.bind(this, 'first')}>
-      				<img className='icon' src='img/icon-first.svg' alt='First icon' />
-      			</button>
-	      		<button className='button' onClick={this.props.navigateTo.bind(this, 'prev')}>
-      				<img className='icon' src='img/icon-back.svg' alt='Back icon' />
-	      		</button>
-	        	<button className='button' onClick={this.switchToFullScreen}>
-      				<img className='icon play-icon' src='img/icon-play.svg' alt='Play icon' />
-	        	</button>
-	        	<button className='button mirrored' onClick={this.props.navigateTo.bind(this, 'next')}>
-      				<img className='icon' src='img/icon-back.svg' alt='Forward icon' />
-	        	</button>
-	        	<button className='button mirrored' onClick={this.props.navigateTo.bind(this, 'last')}>
-      				<img className='icon' src='img/icon-first.svg' alt='Last icon' />
-	        	</button>
-        	</nav>
-        	<div className='crud-buttons'>
-        		<button className='button' onClick={this.handleCreate}>New Slide</button>
-        		<button className='button button-danger' onClick={this.handleDeleteAll}>Delete all</button>
-        	</div>
-        </div>
-      </CSSTransitionGroup>);
+    	<div className='toolbar'>
+    		<h4>Blended</h4>
+    		<nav className='transport-buttons'>
+    			<button className='button' onClick={this.props.navigateTo.bind(this, 'first')}>
+    				<img className='icon' src='/img/icon-first.svg' alt='First icon' />
+    			</button>
+      		<button className='button' onClick={this.props.navigateTo.bind(this, 'prev')}>
+    				<img className='icon' src='/img/icon-back.svg' alt='Back icon' />
+      		</button>
+        	<button className='button' onClick={this.switchToFullScreen}>
+    				<img className='icon play-icon' src='/img/icon-play.svg' alt='Play icon' />
+        	</button>
+        	<button className='button mirrored' onClick={this.props.navigateTo.bind(this, 'next')}>
+    				<img className='icon' src='/img/icon-back.svg' alt='Forward icon' />
+        	</button>
+        	<button className='button mirrored' onClick={this.props.navigateTo.bind(this, 'last')}>
+    				<img className='icon' src='/img/icon-first.svg' alt='Last icon' />
+        	</button>
+      	</nav>
+      	<div className='crud-buttons'>
+      		<button className='button' onClick={this.handleCreate}>New Slide</button>
+      		<button className='button button-danger' onClick={this.handleDeleteAll}>Delete all</button>
+      	</div>
+      </div>);
 	}
 };
 

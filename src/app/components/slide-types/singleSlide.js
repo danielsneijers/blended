@@ -5,22 +5,24 @@ class SingleSlide extends Component {
 
 	// Event listeners
 	handleOnBlur(property, e) {
-		let value = e.currentTarget.innerHTML;
-		this.props.saveSlideContent(property, value);
+		let value = e.currentTarget.innerHTML,
+				slide = this.props.slideContent;
+		this.props.saveSlideContent(property, value, slide);
 	}
 
 	// Render
 	render() {
 
-		console.log(this.props.slideContent)
-
 		let slide = this.props.slideContent,
 				emptySlide = Object.keys(slide).length === 0,
 				title = slide.title,
-				body = slide.body || 'hoi';
+				body = slide.body;
 
 		let styles = {
-		  backgroundImage: `url(/img/ferris-wheel.jpeg)`,
+			textAlign: slide.textAlign,
+			color: slide.color,
+			backgroundColor: slide.backgroundColor,
+		  backgroundImage: `url(${slide.backgroundUrl})`,
 		};
 
 		return (

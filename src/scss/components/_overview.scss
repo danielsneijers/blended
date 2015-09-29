@@ -11,6 +11,10 @@
 	&::-webkit-scrollbar {
     	display: none;
 	}
+
+	a {
+		color: inherit;
+	}
 }
 .overview-item {
 	margin-bottom: 1rem;

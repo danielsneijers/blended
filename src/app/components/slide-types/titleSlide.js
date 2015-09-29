@@ -1,9 +1,6 @@
 import React, { Component } from 'react/addons';
 import Classnames from 'classnames';
 
-
-const {addons: {CSSTransitionGroup}} = React;
-
 class TitleSlide extends Component {
 
 	// Event listeners
@@ -24,7 +21,7 @@ class TitleSlide extends Component {
 			textAlign: slide.textAlign,
 			color: slide.color,
 			backgroundColor: slide.backgroundColor,
-		  backgroundImage: slide.backgroundUrl,
+		  backgroundImage: `url(${slide.backgroundUrl})`,
 		};
 
 		return (

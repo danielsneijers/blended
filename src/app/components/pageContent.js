@@ -4,8 +4,6 @@ import SlideStore from '../stores/slideStore';
 import Overview from '../components/overview.js';
 import SlideContainer from '../components/slideContainer.js';
 
-const {addons: {CSSTransitionGroup}} = React;
-
 class PageContent extends Component {
 
 	// Init

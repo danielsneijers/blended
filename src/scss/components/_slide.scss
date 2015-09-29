@@ -26,13 +26,19 @@ $offset: $sidebarWidth + $padding + $margin;
 	max-height: 100vh;
 	width: 100%;
 	box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
-	//transition: transform 0.15s ease, box-shadow 0.15s ease;
 	overflow: hidden;
 	padding: 1rem;
+
+	h1, p {
+		width: 100%;
+	}
 
 	h1 * {
 		font-size: 1em;
 		font-weight: inherit;
+	}
+	p {
+		margin: 2em 0 1em 0; // Relative to font size for slide preview
 	}
 
 	.options-button {
@@ -44,8 +50,37 @@ $offset: $sidebarWidth + $padding + $margin;
 	background-size: cover;
 	background-position: center;
 	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 
 	[contenteditable='true'] {
 		outline: none;
+	}
+}
+
+.split-pane {
+	flex-direction: row;
+	align-items: stretch;
+	h1, p {
+		width: 100%;
+	}
+
+	h1 * {
+		font-size: 1em;
+		font-weight: inherit;
+	}
+	p {
+		margin: 2em 0 1em 0; // Relative to font size for slide preview
+	}
+	.pane {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+ 		flex: 0 1 50%;
+		background-size: cover;
+		background-position: center;
 	}
 }

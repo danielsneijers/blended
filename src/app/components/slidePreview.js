@@ -2,10 +2,9 @@ import React, { Component } from 'react/addons';
 import Classnames from 'classnames';
 import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
-// import CommitStore from '../stores/commitStore';
-// import CommitListItem from './commitListItem';
-
-const {addons: {CSSTransitionGroup}} = React;
+import TitleSlide from './slide-types/titleSlide';
+import SingleSlide from './slide-types/singleSlide';
+import SplitSlide from './slide-types/splitSlide';
 
 class CommitList extends Component {
 
@@ -23,25 +22,27 @@ class CommitList extends Component {
 	// Render
 	render() {
 
-		let slide = this.props.slide,
-				title =  this.props.slide.title;
+		let slide;
 
-		let styles = {
-			textAlign: slide.textAlign,
-			color: slide.color,
-			backgroundColor: slide.backgroundColor,
-		  backgroundImage: slide.backgroundUrl,
-		};
+		switch(this.props.slide.type){
+			case 'title':
+				slide = (<TitleSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} editable={false} />);
+				break;
+			case 'single':
+				slide = (<SingleSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} editable={false} />);
+				break;
+			case 'split':
+				slide = (<SplitSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} editable={false} />);
+				break;
+		}
 
 		return (
-			<CSSTransitionGroup className="slide-preview" transitionName='fadeIn' transitionAppear={true} component='div'>
-				<div className='content' style={styles}>
+			<div className="slide-preview">
 					<button className='button button-triangle button-danger' onClick={this.handleDelete.bind(this)}>
-						<img className='icon' src='img/icon-delete.svg' alt='Delete icon' />
+						<img className='icon' src='/img/icon-delete.svg' alt='Delete icon' />
 					</button>
-					<h1 dangerouslySetInnerHTML={{__html: title}} ></h1>
-				</div>
-			</CSSTransitionGroup>
+					{slide}
+			</div>
 		);
 	}
 

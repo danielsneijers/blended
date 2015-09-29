@@ -1,7 +1,7 @@
 .slide-options {
-    width: 100%;
+    width: 400px;
     height: 100%;
-	background-color: rgba(59, 59, 59, 0.95);
+	background-color: rgba(0, 0, 0, 0.9);
     z-index: 1;
     color: white;
     padding: 1rem 2rem;
@@ -10,6 +10,7 @@
     right: 0;
     opacity: 0!important;
     pointer-events: none;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.1);
     transition: opacity 0.1s;
 
     h4 {

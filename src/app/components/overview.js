@@ -5,8 +5,6 @@ import SlideActions from '../actions/slideActions.js';
 import SlideStore from '../stores/slideStore';
 import SlidePreview from './slidePreview';
 
-const {addons: {CSSTransitionGroup}} = React;
-
 class Overview extends Component {
 
 	// Init

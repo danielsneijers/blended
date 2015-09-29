@@ -8,9 +8,12 @@ export default {
 
   createSlide: (position) => {
     let slide = {
-      title: 'Title',
-      position: position,
       type: 'title',
+      position: position,
+      title: 'Title',
+      title2: 'Second title',
+      body: 'Slide contents',
+      body2: 'Second pane contents',
       textAlign: 'center',
       backgroundColor: '#FFFFFF',
       backgroundUrl: '',

@@ -9,7 +9,6 @@ module.exports = {
     "./src/app/app.js",
     "./src/scss/styles.scss"
   ],
-  devtool: 'source-map',
   output: {
     path: path.resolve("./dist"),
     filename: "app.js"
@@ -28,7 +27,7 @@ module.exports = {
     ]
   },
   postcss: function () {
-    return { 
+    return {
       defaults: [autoprefixer],
       cleaner:  [autoprefixer({ browsers: ["last 2 versions"] })]
     };

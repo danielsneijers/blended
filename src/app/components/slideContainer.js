@@ -5,6 +5,7 @@ import SlideStore from '../stores/slideStore';
 import SlideOptions from './slideOptions';
 import TitleSlide from './slide-types/titleSlide';
 import SingleSlide from './slide-types/singleSlide';
+import SplitSlide from './slide-types/splitSlide';
 
 const {addons: {CSSTransitionGroup}} = React;
 
@@ -14,15 +15,16 @@ class SlideContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			optionsActive: false
+			optionsActive: window.location.hash == `#editing`
 		}
 	}
 
   // Event listeners
   handleEditButtonClick(e) {
   	e.preventDefault();
+  	this.state.optionsActive ? window.location.hash = '' : window.location.hash += '#editing';
   	this.setState({
-  		optionsActive: this.state.optionsActive ? false : true
+  		optionsActive: !this.state.optionsActive
   	});
   }
   // Helpers
@@ -35,6 +37,8 @@ class SlideContainer extends Component {
 	render() {
 
 		let slide;
+
+		console.log('render');
 
 		switch(this.props.slide.type){
 			case 'title':
@@ -53,7 +57,7 @@ class SlideContainer extends Component {
 				{slide}
 				<SlideOptions currentSlide={this.props.slide} optionsActive={this.state.optionsActive} />
 				<button className='button button-triangle button-triangle-large options-button' onClick={this.handleEditButtonClick.bind(this)}>
-					<img className='icon' src='img/icon-setting.svg' alt='Settings icon' />
+					<img className='icon' src='/img/icon-setting.svg' alt='Settings icon' />
 				</button>
 	  	</CSSTransitionGroup>
 		);

@@ -13,6 +13,8 @@ You need to have [Node.js](https://nodejs.org/en/) and NPM installed. With those
     $ npm install
     $ npm start
 
+ A fresh copy of the app will be waiting for you at localhost:8080
+
 ## Preparing for Deployment
 
 Running a build with minification and optimized assets for deployment.

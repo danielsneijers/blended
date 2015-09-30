@@ -1,14 +1,160 @@
+$buttonHeight: 2.125rem;
+
 .button {
 	display: inline-block;
 	outline: none;
-	border: none;
+	border: 1px solid $grey-light;
 	border-radius: 3px;
 	padding: 0.25rem 0.5rem;
-	background-color: $orange;
+	background-color: $grey-light;
 	font-family: 'Dosis', 'Helvetica Neue', Helvetica, sans-serif;
+	color: $orange;
+	margin-left: 1rem;
+	transition: border 0.1s ease-in, background-color 0.1s ease-in;
+
+	&:hover {
+		border: 1px solid $orange;
+	}
+	&:active {
+		background-color: white;
+	}
+
+	&.inverted {
+		color: white;
+		background-color: $orange;
+		border-color: $orange;
+
+		&:hover {
+			background-color: darken($orange, 10%);
+		}
+		&:active,
+		&.active {
+			background-color: white!important;
+			color: $orange!important;
+		}
+	}
+}
+.button-danger {
+	background-color: $orange;
 	color: white;
+	border: 1px solid $orange;
+	&:hover {
+		border: 1px solid darken($orange, 10%);
+		background-color: darken($orange, 10%);
+	}
+	&:active {
+		border: 1px solid darken($orange, 10%);
+		background-color: white;
+		color: darken($orange, 10%);
+	}
+}
+
+.button-triangle {
+	position: absolute;
+	top: -1.5rem;
+	right: -1.5rem;
+	z-index: 2;
+	border-radius: 0;
+	padding: 0;
+	width: 3rem;
+	height: 3rem;
+	opacity: 0;
+	transform: rotate(45deg);
+	transition: opacity 0.1s ease-out;
 
 	&:hover {
 		background-color: darken($orange, 10%);
+	}
+
+	.icon {
+		transform: rotate(45deg);
+		position: absolute;
+		z-index: 1;
+		bottom: 0.3rem;
+		left: 1.2rem;
+		width: 10px;
+		height: 10px;
+	}
+}
+.button-triangle-large {
+	background-color: $grey;
+	border-color: $grey;
+	top: -2rem;
+	right: -2rem;
+	width: 4rem;
+	height: 4rem;
+	z-index: 5;
+
+	&:hover {
+		border-color: $grey;
+		background-color: darken($grey, 10%);
+	}
+
+	.icon {
+		position: absolute;
+		z-index: 1;
+		bottom: 0.3rem;
+		left: 1.5rem;
+		width: 15px;
+		height: 15px;
+	}
+}
+
+.button-group button {
+	margin: 0;
+	border-color: $orange;
+	border-radius: 0;
+	&:first-of-type {
+		border-radius: 3px 0 0 3px;
+	}
+	&:last-of-type {
+		border-radius: 0 3px 3px 0;
+	}
+}
+
+.transport-buttons {
+	height: $buttonHeight;
+	text-align: center;
+
+	button {
+		position: relative;
+		height: $buttonHeight;
+		width: $buttonHeight;
+		background-color: $grey-light;
+		border-radius: 50%;
+		border: 1px solid $grey-light;
+		margin: 0 0.5rem;
+
+		&:hover {
+			background-color: $grey-light;
+			border-radius: 50%;
+			border: 1px solid $orange;
+		}
+		&:active {
+			background-color: white;
+		}
+
+		&.mirrored .icon {
+			transform: rotate(180deg);
+		}
+	}
+
+	.icon {
+		display: inline-block;
+		position: absolute;
+		top: ($buttonHeight - 0.9)/2;
+		left: 0;
+		right: 0;
+		height: 0.8rem;
+		width: auto;
+		margin: 0 auto;
+		padding-right: 0.1rem;
+	}
+
+	.play-icon {
+		width: 1.2rem;
+		height: 1.2rem;
+		top: ($buttonHeight - 1.3)/2;
+		left: 0.3rem;
 	}
 }

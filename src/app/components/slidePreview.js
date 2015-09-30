@@ -2,16 +2,16 @@ import React, { Component } from 'react/addons';
 import Classnames from 'classnames';
 import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
-// import CommitStore from '../stores/commitStore';
-// import CommitListItem from './commitListItem';
-
-const {addons: {CSSTransitionGroup}} = React;
+import TitleSlide from './slide-types/titleSlide';
+import SingleSlide from './slide-types/singleSlide';
+import SplitSlide from './slide-types/splitSlide';
 
 class CommitList extends Component {
 
 	// Component lifecycle
 	constructor(props) {
     super(props);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   // Event handlers
@@ -23,23 +23,30 @@ class CommitList extends Component {
 	// Render
 	render() {
 
-		let title =  this.props.slide.title;
-		let styles = {
-		  //backgroundImage: `url(/img/building.jpeg)`,
-		};
+		let slide;
+
+		switch(this.props.slide.type){
+			case 'title':
+				slide = (<TitleSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} editable={false} />);
+				break;
+			case 'single':
+				slide = (<SingleSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} editable={false} />);
+				break;
+			case 'split':
+				slide = (<SplitSlide slideContent={this.props.slide} saveSlideContent={this.saveSlideContent} editable={false} />);
+				break;
+		}
 
 		return (
-				<div className='content' style={styles}>
-					<h1 dangerouslySetInnerHTML={{__html: title}}></h1>
-					<button onClick={this.handleDelete.bind(this)}>delete</button>
-				</div>
+			<div className="slide-preview">
+					<button className='button button-triangle button-danger' onClick={this.handleDelete}>
+						<img className='icon' src='/img/icon-delete.svg' alt='Delete icon' />
+					</button>
+					{slide}
+			</div>
 		);
 	}
 
-	// onChange
-	_onChange(){
-		// this.setState({ commits: CommitStore.getCommits() });
-	}
 };
 
 export default CommitList;

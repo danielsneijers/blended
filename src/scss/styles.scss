@@ -3,18 +3,20 @@
 @import "base/base";
 @import "base/normalize";
 @import "base/typography";
+@import "base/layout";
 
 // Mixins
 @import "mixins/aspect-ratio";
 
 // Shared
-@import "shared/grid";
 @import "shared/buttons";
 @import "shared/animations";
 
 // Components
 @import "components/dragula";
 @import "components/toolbar";
+@import "components/new-presentation";
 @import "components/page-content";
 @import "components/overview";
 @import "components/slide";
+@import "components/slide-options";

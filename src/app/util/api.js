@@ -1,28 +1,32 @@
-import AppDispatcher from '../dispatcher/appDispatcher.js';
-import SlideConstants from '../constants/slideConstants.js';
+import AppDispatcher from '../dispatcher/appDispatcher';
+import SlideConstants from '../constants/slideConstants';
 
 let db;
 
 let databaseConnect = (callback) => {
   let req = window.indexedDB.open("presentation", 1);
-  req.onerror = (e) => {
-    // TODO: create errorstore and put error
-    console.log("Error opening DB", e);
-  };
-  req.onupgradeneeded = (e) => {
-    console.log("Upgrading");
+  req.onerror = e => handleDatabaseError(e);
+  req.onupgradeneeded = e => {
     db = e.target.result;
     let objectStore = db.createObjectStore("slides", { keyPath : "id", autoIncrement: true });
-    // let _objectStore = db.transaction(["slides"],"readwrite")
-    //                     .objectStore("slides");
-    // callback(_objectStore);
   };
-  req.onsuccess  = (e) => {
+  req.onsuccess = e => {
     db = e.target.result;
-    let _objectStore = db.transaction(["slides"],"readwrite")
-                        .objectStore("slides");
+    let _objectStore = db.transaction(["slides"],"readwrite").objectStore("slides");
     callback(_objectStore);
   }
+};
+
+let dispatchAndClose = (actionType, data) => {
+  AppDispatcher.dispatch({
+    actionType: SlideConstants[actionType],
+    data: data
+  });
+  db.close();
+};
+// TODO: create errorstore and put error
+let handleDatabaseError = (e) => {
+  console.log("Error", e);
 };
 
 const Api = {
@@ -31,63 +35,38 @@ const Api = {
     databaseConnect(objectStore => {
       let slides = [];
       let transaction = objectStore.openCursor();
-      transaction.onsuccess = function(e) {
+
+      transaction.onerror = e => handleDatabaseError(e);
+      transaction.onsuccess = e => {
         let cursor = e.target.result;
         if (cursor) {
           slides.push(cursor.value);
           cursor.continue();
         } else {
-          AppDispatcher.dispatch({
-            actionType: SlideConstants.GET_ALL_SLIDES,
-            data: slides
-          });
-          db.close();
+          dispatchAndClose('GET_ALL_SLIDES', slides);
         }
       };
     });
   },
 
-  post: (position) => {
-    let slide = {title: 'Title', position: position};
+  post: (slide) => {
     databaseConnect( objectStore => {
       let transaction = objectStore.add(slide);
-      transaction.onerror = (e) => {
-          // TODO: create errorstore and put error
-          console.log("Error");
-      };
-      transaction.onsuccess = (e) => {
-        // TODO: create errorstore and put error
-        console.log(e);
-        AppDispatcher.dispatch({
-          actionType: SlideConstants.CREATE_SLIDE,
-          data: slide
-        });
-        db.close();
-      };
+      transaction.onerror = e => handleDatabaseError(e);
+      transaction.onsuccess = dispatchAndClose('CREATE_SLIDE', slide);
     });
   },
 
-  put: (slides, length) => {
-    console.log(slides);
+  put: (slides, length, seed = false) => {
+    console.log('%c' + length, 'background-color: #FFDD00;');
     databaseConnect( objectStore => {
       let i = 0;
       for(let slide of slides){
         let transaction = objectStore.put(slide);
-        transaction.onerror = (e) => {
-          // TODO: create errorstore and put error
-          console.log("Error");
-        };
-        transaction.onsuccess = (e) => {
-          // TODO: create errorstore and put error
+        transaction.onerror = e => handleDatabaseError(e);
+        transaction.onsuccess = () => {
           i++;
-          if(i == length){
-            console.info('dispatch');
-            AppDispatcher.dispatch({
-              actionType: SlideConstants.UPDATE_SLIDE,
-              data: slide
-            });
-            db.close();
-          }
+          i == length && !seed ? dispatchAndClose('UPDATE_SLIDE', slides) : dispatchAndClose('SEED_DB', slides);
         }
       }
     });
@@ -96,32 +75,16 @@ const Api = {
   delete: (id) => {
     databaseConnect( objectStore => {
       let transaction = objectStore.delete(id);
-      transaction.onsuccess = (e) => {
-        AppDispatcher.dispatch({
-          actionType: SlideConstants.DELETE_SLIDE,
-          data: id
-        });
-        db.close();
-      };
+      transaction.onerror = e => handleDatabaseError(e);
+      transaction.onsuccess = dispatchAndClose('DELETE_SLIDE', id);
     });
   },
 
   reset: () => {
     let transaction = indexedDB.deleteDatabase('presentation');
-    transaction.onsuccess = () => {
-      console.log("Deleted database successfully");
-      AppDispatcher.dispatch({
-        actionType: SlideConstants.RESET,
-        data: ''
-      });
-    };
-    transaction.onerror = () => {
-      // TODO: create errorstore and put error
-      console.log("Couldn't delete database");
-    };
-    transaction.onblocked = () => {
-      console.log("Couldn't delete database due to the operation being blocked");
-    };
+    transaction.onerror = e => handleDatabaseError(e);
+    transaction.onblocked = e => handleDatabaseError(e);
+    transaction.onsuccess = dispatchAndClose('RESET', '');
   }
 }
 

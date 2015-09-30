@@ -5,7 +5,6 @@ var path = require('path');
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
-var Server = require('karma').Server;
 
 gulp.task('default', ['copy', 'webpack-dev-server']);
 gulp.task('dist', ['copy', 'webpack:build']);
@@ -20,6 +19,8 @@ gulp.task("webpack-dev-server", function(callback) {
 		'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/dev-server'
 	);
+	myConfig.devtool = 'source-map';
+
   var compiler = webpack(myConfig);
 
   new WebpackDevServer(compiler, {
@@ -63,12 +64,13 @@ gulp.task("webpack:build", function(callback) {
 
 gulp.task('copy', function(){
 	gulp.src(['src/index.html', 'src/img/**/*.*'], { base: './src' })
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('server', function() {
   connect.server({
-  	port: 3000,
-  	root: 'dist',
+  	port: 8080,
+  	root: './dist',
+  	fallback: './dist/index.html'
   });
 });

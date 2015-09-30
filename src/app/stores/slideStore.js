@@ -25,13 +25,10 @@ AppDispatcher.register((payload) => {
 
       case SlideConstants.CREATE_SLIDE:
         SlideActions.getAll();
+        _slideStore.emitChange();
         break;
 
       case SlideConstants.UPDATE_SLIDE:
-        console.log(payload.data);
-        // for(let i = 0; i < _slides.length; i++){
-        //   if(payload.data == _slides[i].id) _slides[i] ;
-        // }
         _slideStore.emitChange();
         break;
 
@@ -44,6 +41,11 @@ AppDispatcher.register((payload) => {
 
       case SlideConstants.RESET:
         _slides = [];
+        _slideStore.emitChange();
+        break;
+
+      case SlideConstants.SEED_DB:
+        _slides = payload.data;
         _slideStore.emitChange();
         break;
 

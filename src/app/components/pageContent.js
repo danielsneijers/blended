@@ -1,10 +1,8 @@
 import React, { Component } from 'react/addons';
-import SlideActions from '../actions/slideActions.js';
+import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
-import Overview from '../components/overview.js';
-import SlideContainer from '../components/slideContainer.js';
-
-const {addons: {CSSTransitionGroup}} = React;
+import Overview from '../components/overview';
+import SlideContainer from '../components/slideContainer';
 
 class PageContent extends Component {
 
@@ -13,28 +11,46 @@ class PageContent extends Component {
 		super(props);
 		this.state = {
 			allSlides: [],
-			currentSlide: {}
+			currentSlide: {},
+			slideCount: 0
 		}
+		this._onChange = this._onChange.bind(this);
+		this.handleContainerClick = this.handleContainerClick.bind(this);
 	}
 
 	// Component lifecycle
 	componentWillMount() {
-		SlideStore.addChangeListener(this._onChange.bind(this));
+		SlideStore.addChangeListener(this._onChange);
 	}
 	componentDidMount() {
 		SlideActions.getAll();
 	}
 	componentWillReceiveProps(nextProps) {
-		this.isolateCurrentSlide(nextProps.params.id);
+		let routeId = nextProps.params.id,
+				slideCount = this.state.slideCount;
+
+		if ( slideCount && routeId > slideCount){
+			this.props.navigateTo('last');
+		} else if(slideCount == 0) {
+			console.log('no slides!');
+			window.AppRouter.transitionTo(`/start`);
+		} else {
+			this.isolateCurrentSlide(routeId);
+		}
 	}
 	componentDidUpdate(prevProps, prevState) {
-		// TODO: extend this function to handle out of bounds routes
 		if(Object.keys(this.props.params).length === 0){
 			window.AppRouter.transitionTo('/slide/1');
 		}
 	}
 	componentWillUnmount() {
-		SlideStore.removeChangeListener(this._onChange.bind(this));
+		SlideStore.removeChangeListener(this._onChange);
+	}
+
+	// Event handlers
+	handleContainerClick(e) {
+		let fullscreenEnabled = !window.screenTop && !window.screenY;
+		if(fullscreenEnabled) this.props.navigateTo('next');
 	}
 
 	// Helpers
@@ -49,28 +65,35 @@ class PageContent extends Component {
 
 		let SlideKey = `slide-${this.state.currentSlide.id}-${this.state.currentSlide.position}`;
 
-		if(Object.keys(this.state.currentSlide).length === 0){
-			console.info('yolo')
-		}
-
 		return (
 			<div className='page-content'>
         <Overview allSlides={this.state.allSlides} />
-        <div id='slide-container'>
+        <div id='slide-container' onClick={this.handleContainerClick}>
         	<SlideContainer key={SlideKey} slide={this.state.currentSlide} />
         </div>
 	  	</div>);
 	}
 
 	// onChange
-	_onChange(){
-		let slides = SlideStore.getAllSlides();
+	_onChange() {
+		// Current slide needs to be empty for 'leave' animation
+		this._resetCurrentSlide();
+		let slides = this._sortSlides();
+		this.setState({ allSlides: slides, slideCount: slides.length });
+		this.isolateCurrentSlide(this.props.params.id);
+		this.props.setTotalSlideCount(this.state.slideCount);
+	}
+
+	// onChange Helpers
+	_resetCurrentSlide() {
 		this.setState({ currentSlide: {} });
-		slides.sort(function(a, b) {
+	}
+	_sortSlides() {
+		let _slides = SlideStore.getAllSlides();
+		_slides.sort(function(a, b) {
 		  return parseInt(a.position) - parseInt(b.position);
 		});
-		this.setState({ allSlides: slides });
-		this.isolateCurrentSlide(this.props.params.id);
+		return _slides;
 	}
 };
 

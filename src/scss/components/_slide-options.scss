@@ -1,0 +1,34 @@
+.slide-options {
+    width: 400px;
+    height: 100%;
+	background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1;
+    color: white;
+    padding: 1rem 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0!important;
+    pointer-events: none;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.1);
+    transition: opacity 0.1s;
+
+    h3 {
+    	color: white;
+    }
+    input {
+    	color: $grey;
+        margin-right: 1rem;
+    }
+    &.active {
+    	opacity: 1!important;
+    	pointer-events: auto;
+    }
+    .update-button {
+        margin: 1rem 0;
+    }
+}
+
+.options-row {
+	margin-bottom: 2rem;
+}

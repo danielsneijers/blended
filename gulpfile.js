@@ -5,7 +5,6 @@ var path = require('path');
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
-var Server = require('karma').Server;
 
 gulp.task('default', ['copy', 'webpack-dev-server']);
 gulp.task('dist', ['copy', 'webpack:build']);

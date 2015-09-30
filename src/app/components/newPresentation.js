@@ -1,24 +1,42 @@
 import React, { Component } from 'react/addons';
 import SlideActions from '../actions/slideActions';
+import SlideStore from '../stores/slideStore';
 
 class NewPresentation extends Component {
 
-	// Init
 	constructor(props) {
-		super(props);
+		super(props)
+		// this.state = {
+		// 	allSlides: []
+		// }
 	}
 
 	// Component lifecycle
 	componentWillMount() {
-		// init db
+		SlideStore.addChangeListener(this._onChange);
 		SlideActions.getAll();
+	}
+	componentWillUnmount() {
+		SlideStore.removeChangeListener(this._onChange);
 	}
 
 	// Event handlers
 	handleCreateSlide() {
 		SlideActions.createSlide();
-		window.AppRouter.transitionTo('/slide/1');
 	}
+  handleUpload(e) {
+    // var self = this;
+    // var reader = new FileReader();
+    // var file = e.target.files[0];
+
+    // reader.onload = function(upload) {
+    //   self.setState({
+    //     newArtefact: upload.target.result,
+    //   });
+    // }
+    // reader.readAsText(file);
+    // mixpanel.track("New artefact file upload clicked");
+  }
 
 	// Render
 	render() {
@@ -28,12 +46,21 @@ class NewPresentation extends Component {
 				<div>
         	<h2>Hi there!</h2>
         	<p>It looks like you have no content yet</p>
-        	<p><a onClick={this.handleCreateSlide}>Create your first slide</a></p>
+        	<p><button className='button' onClick={this.handleCreateSlide}>Create a slide!</button></p>
         	<p>or</p>
-        	<p><a>Upload an existing presentation</a></p>
+      		<button className='button' onChange={this.handlePresentationSeed}>
+      			Enjoy Daniel's Awesome Presentation ™
+        	</button>
         </div>
 	  	</div>);
 	}
+
+		_onChange(){
+			let allSlides = SlideStore.getAllSlides();
+			if( allSlides.length > 0 ){
+				window.AppRouter.transitionTo('/slide/1');
+			}
+		}
 };
 
 export default NewPresentation

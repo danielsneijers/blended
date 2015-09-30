@@ -7,7 +7,6 @@ export default {
   },
 
   createSlide: (position = 1) => {
-    console.log(position);
     let slide = {
       type: 'title',
       position: position,

@@ -17,6 +17,7 @@ class SlideContainer extends Component {
 		this.state = {
 			optionsActive: window.location.hash == `#editing`
 		}
+		this.handleEditButtonClick = this.handleEditButtonClick.bind(this);
 	}
 
   // Event listeners
@@ -55,7 +56,7 @@ class SlideContainer extends Component {
 			<CSSTransitionGroup className="slide" transitionName='fadeIn' transitionAppear={true} component='div'>
 				{slide}
 				<SlideOptions currentSlide={this.props.slide} optionsActive={this.state.optionsActive} />
-				<button className='button button-triangle button-triangle-large options-button' onClick={this.handleEditButtonClick.bind(this)}>
+				<button className='button button-triangle button-triangle-large options-button' onClick={this.handleEditButtonClick}>
 					<img className='icon' src='/img/icon-setting.svg' alt='Settings icon' />
 				</button>
 	  	</CSSTransitionGroup>

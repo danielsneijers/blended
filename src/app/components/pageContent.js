@@ -14,11 +14,13 @@ class PageContent extends Component {
 			currentSlide: {},
 			slideCount: 0
 		}
+		this._onChange = this._onChange.bind(this);
+		this.handleContainerClick = this.handleContainerClick.bind(this);
 	}
 
 	// Component lifecycle
 	componentWillMount() {
-		SlideStore.addChangeListener(this._onChange.bind(this));
+		SlideStore.addChangeListener(this._onChange);
 	}
 	componentDidMount() {
 		SlideActions.getAll();
@@ -27,7 +29,6 @@ class PageContent extends Component {
 		let routeId = nextProps.params.id,
 				slideCount = this.state.slideCount;
 		if ( slideCount && routeId > slideCount){
-			console.log('bigger');
 			this.props.navigateTo('last');
 		} else if(slideCount == 0) {
 			console.log('no slides!');
@@ -40,9 +41,14 @@ class PageContent extends Component {
 		if(Object.keys(this.props.params).length === 0){
 			window.AppRouter.transitionTo('/slide/1');
 		}
+		// TODO: check if I can fix this method
+		// if(this.state.slideCount > prevState.slideCount)
+		// 	this.props.navigateTo('last');
+		// // console.log('next state', );
+		// // console.log('prev state', prevState.slideCount);
 	}
 	componentWillUnmount() {
-		SlideStore.removeChangeListener(this._onChange.bind(this));
+		SlideStore.removeChangeListener(this._onChange);
 	}
 
 	// Event handlers
@@ -66,7 +72,7 @@ class PageContent extends Component {
 		return (
 			<div className='page-content'>
         <Overview allSlides={this.state.allSlides} />
-        <div id='slide-container' onClick={this.handleContainerClick.bind(this)}>
+        <div id='slide-container' onClick={this.handleContainerClick}>
         	<SlideContainer key={SlideKey} slide={this.state.currentSlide} />
         </div>
 	  	</div>);
@@ -82,7 +88,8 @@ class PageContent extends Component {
 		});
 		this.setState({
 			allSlides: slides,
-			slideCount: slides.length });
+			slideCount: slides.length
+		});
 		this.isolateCurrentSlide(this.props.params.id);
 		this.props.setTotalSlideCount(this.state.slideCount);
 	}

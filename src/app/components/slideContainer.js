@@ -27,6 +27,7 @@ class SlideContainer extends Component {
   		optionsActive: !this.state.optionsActive
   	});
   }
+
   // Helpers
   saveSlideContent(property, value, slide) {
   	slide[property] = value;

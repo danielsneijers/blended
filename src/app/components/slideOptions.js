@@ -19,9 +19,9 @@ class SlideOptions extends Component {
 				newSlide = this.prepareNewSlide('backgroundUrl', image1);
 		SlideActions.updateSlide(newSlide);
 
-		// let image2 = React.findDOMNode(this.refs.bgImgField2).value,
-		// 		newSlide = this.prepareNewSlide('backgroundUrl2', image2);
-		// SlideActions.updateSlide(newSlide);
+		let image2 = React.findDOMNode(this.refs.bgImgField2).value;
+		newSlide = this.prepareNewSlide('backgroundUrl2', image2);
+		SlideActions.updateSlide(newSlide);
 	}
 
 	// Helpers

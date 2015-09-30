@@ -56,7 +56,6 @@ class Overview extends Component {
 		return allSlides;
 	}
 
-
 	// Render
 	render() {
 

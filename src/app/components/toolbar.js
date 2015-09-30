@@ -27,6 +27,7 @@ class Toolbar extends Component {
 	}
 	handleDeleteAll(e) {
 		SlideActions.deleteAll();
+		window.AppRouter.transitionTo('/start');
 	}
 
 	// Helpers

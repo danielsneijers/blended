@@ -11,7 +11,8 @@ class PageContent extends Component {
 		super(props);
 		this.state = {
 			allSlides: [],
-			currentSlide: {}
+			currentSlide: {},
+			slideCount: 0
 		}
 	}
 
@@ -23,10 +24,19 @@ class PageContent extends Component {
 		SlideActions.getAll();
 	}
 	componentWillReceiveProps(nextProps) {
-		this.isolateCurrentSlide(nextProps.params.id);
+		let routeId = nextProps.params.id,
+				slideCount = this.state.slideCount;
+		if ( slideCount && routeId > slideCount){
+			console.log('bigger');
+			this.props.navigateTo('last');
+		} else if(slideCount == 0) {
+			console.log('no slides!');
+			window.AppRouter.transitionTo(`/start`);
+		} else {
+			this.isolateCurrentSlide(routeId);
+		}
 	}
 	componentDidUpdate(prevProps, prevState) {
-		// TODO: extend this function to handle out of bounds routes
 		if(Object.keys(this.props.params).length === 0){
 			window.AppRouter.transitionTo('/slide/1');
 		}
@@ -70,8 +80,11 @@ class PageContent extends Component {
 		slides.sort(function(a, b) {
 		  return parseInt(a.position) - parseInt(b.position);
 		});
-		this.setState({ allSlides: slides });
+		this.setState({
+			allSlides: slides,
+			slideCount: slides.length });
 		this.isolateCurrentSlide(this.props.params.id);
+		this.props.setTotalSlideCount(this.state.slideCount);
 	}
 };
 

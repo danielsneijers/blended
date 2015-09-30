@@ -1,4 +1,4 @@
-.page-content {
+.new-presentation-container {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -6,5 +6,7 @@
 	height: 100vh;
 	padding-top: $toolbarHeight;
 	display: flex;
-	align-items: stretch;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }

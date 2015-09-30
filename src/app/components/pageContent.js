@@ -41,11 +41,6 @@ class PageContent extends Component {
 		if(Object.keys(this.props.params).length === 0){
 			window.AppRouter.transitionTo('/slide/1');
 		}
-		// TODO: check if I can fix this method
-		// if(this.state.slideCount > prevState.slideCount)
-		// 	this.props.navigateTo('last');
-		// // console.log('next state', );
-		// // console.log('prev state', prevState.slideCount);
 	}
 	componentWillUnmount() {
 		SlideStore.removeChangeListener(this._onChange);

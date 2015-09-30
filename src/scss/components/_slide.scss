@@ -17,6 +17,9 @@ $offset: $sidebarWidth + $padding + $margin;
   		.options-button {
   			display: none;
   		}
+  		* {
+  			pointer-events: none;
+  		}
   	}
 }
 

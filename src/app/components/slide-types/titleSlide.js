@@ -26,7 +26,7 @@ class TitleSlide extends Component {
 
 		return (
 			<div className='content' style={styles}>
-				<h1 contentEditable='true'
+				<h1 className='slide-title' contentEditable='true'
 					onBlur={this.handleOnBlur.bind(this, 'title')}
 					dangerouslySetInnerHTML={{__html: title}} >
 				</h1>

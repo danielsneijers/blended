@@ -65,7 +65,7 @@ const Api = {
         transaction.onerror = e => handleDatabaseError(e);
         transaction.onsuccess = () => {
           i++;
-          if(i == length) dispatchAndClose('UPDATE_SLIDE', slide);
+          if(i == length) dispatchAndClose('UPDATE_SLIDE', slides);
         }
       }
     });

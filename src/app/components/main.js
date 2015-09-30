@@ -13,6 +13,7 @@ class Main extends Component {
 		}
 		this.setTotalSlideCount = this.setTotalSlideCount.bind(this);
 		this.navigateTo = this.navigateTo.bind(this);
+		this.calculateRoute = this.calculateRoute.bind(this);
 	}
 
 	// Helpers
@@ -21,7 +22,12 @@ class Main extends Component {
 	}
 	navigateTo(direction) {
 		let fullscreenEnabled = !window.screenTop && !window.screenY,
-				route = fullscreenEnabled ? this.params.id : this.props.params.id;
+				route = this.calculateRoute(direction, this.props.params.id);
+
+		if(route < 1) route = 1;
+		window.AppRouter.transitionTo(`/slide/${route}`);
+	}
+	calculateRoute(direction, route) {
 		switch(direction) {
 	    case 'first':
         route = 1;
@@ -36,8 +42,7 @@ class Main extends Component {
         route = this.state.slideCount;
         break;
 		}
-		if(route < 1) route = 1;
-		window.AppRouter.transitionTo(`/slide/${route}`);
+		return route;
 	}
 
 	// Render

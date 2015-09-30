@@ -7,6 +7,7 @@ class SlideOptions extends Component {
 	// Init
 	constructor(props){
 		super(props);
+		this.handleBackgroundImagesUpdate = this.handleBackgroundImagesUpdate.bind(this);
 	}
 
 	// Event handlers
@@ -93,7 +94,7 @@ class SlideOptions extends Component {
 						<input id='background-image-field2' name='background-image-field2' type='text' defaultValue={slide.backgroundUrl2} ref='bgImgField2' />
 					</div>
 				</form>
-				<button className='button' onClick={this.handleBackgroundImagesUpdate.bind(this)}>Update</button>
+				<button className='button' onClick={this.handleBackgroundImagesUpdate}>Update</button>
 			</div>
 		);
 	}

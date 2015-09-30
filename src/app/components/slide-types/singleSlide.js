@@ -31,10 +31,12 @@ class SingleSlide extends Component {
 					onBlur={this.handleOnBlur.bind(this, 'title')}
 					dangerouslySetInnerHTML={{__html: title}} >
 				</h1>
-				<p contentEditable='true'
-					onBlur={this.handleOnBlur.bind(this, 'body')}
-					dangerouslySetInnerHTML={{__html: body}} >
-				</p>
+
+					<div className='slide-body' contentEditable='true'
+						onBlur={this.handleOnBlur.bind(this, 'body')}
+						dangerouslySetInnerHTML={{__html: body}} >
+					</div>
+
 			</div>
 		);
 	}

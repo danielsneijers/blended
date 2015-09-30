@@ -44,6 +44,11 @@ AppDispatcher.register((payload) => {
         _slideStore.emitChange();
         break;
 
+      case SlideConstants.SEED_DB:
+        _slides = payload.data;
+        _slideStore.emitChange();
+        break;
+
       default:
         break;
     }

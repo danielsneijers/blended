@@ -36,8 +36,12 @@ export default {
   deleteSlide: (id) => {
     Api.delete(id);
   },
-
   deleteAll: () => {
   	Api.reset();
+  },
+
+  seedDatabase: (slides) => {
+    length = slides.length;
+    Api.put(slides, length, true);
   }
 }

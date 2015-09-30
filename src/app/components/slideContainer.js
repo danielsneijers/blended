@@ -18,6 +18,7 @@ class SlideContainer extends Component {
 			optionsActive: window.location.hash == `#editing`
 		}
 		this.handleEditButtonClick = this.handleEditButtonClick.bind(this);
+		console.log('%cSee those pesky console warnings? Apparently those are cause by React-Router in combination with CSSTransitionGroup. No fix yet.', 'background-color: #ECF0F1; color: #3b3b3b;');
 	}
 
   // Event listeners

@@ -1,14 +1,12 @@
 import React, { Component } from 'react/addons';
 import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
+import Seed from '../util/seed';
 
 class NewPresentation extends Component {
 
 	constructor(props) {
 		super(props)
-		// this.state = {
-		// 	allSlides: []
-		// }
 	}
 
 	// Component lifecycle
@@ -24,18 +22,9 @@ class NewPresentation extends Component {
 	handleCreateSlide() {
 		SlideActions.createSlide();
 	}
-  handleUpload(e) {
-    // var self = this;
-    // var reader = new FileReader();
-    // var file = e.target.files[0];
-
-    // reader.onload = function(upload) {
-    //   self.setState({
-    //     newArtefact: upload.target.result,
-    //   });
-    // }
-    // reader.readAsText(file);
-    // mixpanel.track("New artefact file upload clicked");
+  handlePresentationSeed(e) {
+  	console.log('Seed');
+  	SlideActions.updateAll(Seed);
   }
 
 	// Render
@@ -45,10 +34,10 @@ class NewPresentation extends Component {
 			<div className='new-presentation-container'>
 				<div>
         	<h2>Hi there!</h2>
-        	<p>It looks like you have no content yet</p>
-        	<p><button className='button' onClick={this.handleCreateSlide}>Create a slide!</button></p>
+        	<p>There's nothing to enjoy here yet, <br/>but the world is your canvas.</p>
+        	<p><button className='button start-button' onClick={this.handleCreateSlide}>Create a slide!</button></p>
         	<p>or</p>
-      		<button className='button' onChange={this.handlePresentationSeed}>
+      		<button className='button seed-button' onClick={this.handlePresentationSeed}>
       			Enjoy Daniel's Awesome Presentation ™
         	</button>
         </div>
@@ -56,6 +45,7 @@ class NewPresentation extends Component {
 	}
 
 		_onChange(){
+			console.log('onchage!');
 			let allSlides = SlideStore.getAllSlides();
 			if( allSlides.length > 0 ){
 				window.AppRouter.transitionTo('/slide/1');

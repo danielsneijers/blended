@@ -7,6 +7,7 @@ class SlideOptions extends Component {
 	// Init
 	constructor(props){
 		super(props);
+		this.handleBackgroundImagesUpdate = this.handleBackgroundImagesUpdate.bind(this);
 	}
 
 	// Event handlers
@@ -62,38 +63,44 @@ class SlideOptions extends Component {
 		let rightAlignButtonClasses = Classnames('button inverted', {
 			active: slide.textAlign == 'right'
 		});
+		let backgroundHeaderClasses = Classnames({
+			hidden: slide.type != 'split'
+		});
+		let splitBackgroundHeaderClasses = Classnames('options-row', {
+			hidden: slide.type != 'split'
+		});
 
 		return (
 			<div className={slideOptionClasses}>
 				<div className='button-group options-row'>
-					<h4>Slide type</h4>
+					<h3>Slide type</h3>
 					<button className={titleButtonClasses} onClick={this.updateSlide.bind(this, 'type', 'title')}>Title only</button>
 					<button className={titleBodyButtonClasses} onClick={this.updateSlide.bind(this, 'type', 'single')}>Title + body</button>
 					<button className={splitButtonClasses} onClick={this.updateSlide.bind(this, 'type', 'split')}>Split pane</button>
 				</div>
 				<div className='button-group options-row'>
-					<h4>Text align</h4>
+					<h3>Text align</h3>
 					<button className={leftAlignButtonClasses} onClick={this.updateSlide.bind(this, 'textAlign', 'left')}>Left</button>
 					<button className={centerAlignButtonClasses} onClick={this.updateSlide.bind(this, 'textAlign', 'center')}>Center</button>
 					<button className={rightAlignButtonClasses} onClick={this.updateSlide.bind(this, 'textAlign', 'right')}>Right</button>
 				</div>
 				<div className='options-row'>
-					<h4>Text color</h4>
+					<h3>Text color</h3>
 					<input type='color' defaultValue={slide.color} onChange={this.handleColorChange.bind(this, 'color')} />
 				</div>
 				<form>
 					<div className='options-row'>
-						<h4>Left pane Background</h4>
+						<h3><span className={backgroundHeaderClasses}>Left pane </span>Background</h3>
 						<input type='color' defaultValue={slide.backgroundColor} onChange={this.handleColorChange.bind(this, 'backgroundColor')} />
 						<input id='background-image-field' name='background-image-field' type='text' defaultValue={slide.backgroundUrl} ref='bgImgField1' />
 					</div>
-					<div className='options-row'>
-						<h4>Right pane background</h4>
+					<div className={splitBackgroundHeaderClasses}>
+						<h3>Right pane background</h3>
 						<input type='color' defaultValue={slide.backgroundColor2} onChange={this.handleColorChange.bind(this, 'backgroundColor2')} />
 						<input id='background-image-field2' name='background-image-field2' type='text' defaultValue={slide.backgroundUrl2} ref='bgImgField2' />
 					</div>
 				</form>
-				<button className='button' onClick={this.handleBackgroundImagesUpdate.bind(this)}>Update</button>
+				<button className='button inverted update-button' onClick={this.handleBackgroundImagesUpdate}>Update background image</button>
 			</div>
 		);
 	}

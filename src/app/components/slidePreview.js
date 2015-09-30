@@ -11,6 +11,7 @@ class CommitList extends Component {
 	// Component lifecycle
 	constructor(props) {
     super(props);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   // Event handlers
@@ -38,7 +39,7 @@ class CommitList extends Component {
 
 		return (
 			<div className="slide-preview">
-					<button className='button button-triangle button-danger' onClick={this.handleDelete.bind(this)}>
+					<button className='button button-triangle button-danger' onClick={this.handleDelete}>
 						<img className='icon' src='/img/icon-delete.svg' alt='Delete icon' />
 					</button>
 					{slide}

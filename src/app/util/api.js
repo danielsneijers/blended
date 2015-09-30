@@ -57,7 +57,8 @@ const Api = {
     });
   },
 
-  put: (slides, length) => {
+  put: (slides, length, seed = false) => {
+    console.log('%c' + length, 'background-color: #FFDD00;');
     databaseConnect( objectStore => {
       let i = 0;
       for(let slide of slides){
@@ -65,7 +66,7 @@ const Api = {
         transaction.onerror = e => handleDatabaseError(e);
         transaction.onsuccess = () => {
           i++;
-          if(i == length) dispatchAndClose('UPDATE_SLIDE', slide);
+          i == length && !seed ? dispatchAndClose('UPDATE_SLIDE', slides) : dispatchAndClose('SEED_DB', slides);
         }
       }
     });

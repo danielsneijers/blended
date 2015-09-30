@@ -42,20 +42,20 @@ class SlitSlide extends Component {
 						onBlur={this.handleOnBlur.bind(this, 'title')}
 						dangerouslySetInnerHTML={{__html: title}} >
 					</h1>
-					<p contentEditable='true'
+					<div className='slide-body' contentEditable='true'
 						onBlur={this.handleOnBlur.bind(this, 'body')}
 						dangerouslySetInnerHTML={{__html: body}} >
-					</p>
+					</div>
 				</div>
 				<div className='pane right-pane' style={rightPaneStyle}>
 					<h1 contentEditable='true'
 						onBlur={this.handleOnBlur.bind(this, 'title2')}
 						dangerouslySetInnerHTML={{__html: title2}} >
 					</h1>
-					<p contentEditable='true'
+					<div className='slide-body' contentEditable='true'
 						onBlur={this.handleOnBlur.bind(this, 'body2')}
 						dangerouslySetInnerHTML={{__html: body2}} >
-					</p>
+					</div>
 				</div>
 			</div>
 		);

@@ -58,7 +58,6 @@ const Api = {
   },
 
   put: (slides, length, seed = false) => {
-    console.log('%c' + length, 'background-color: #FFDD00;');
     databaseConnect( objectStore => {
       let i = 0;
       for(let slide of slides){

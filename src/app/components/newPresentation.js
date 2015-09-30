@@ -23,7 +23,6 @@ class NewPresentation extends Component {
 		SlideActions.createSlide();
 	}
   handlePresentationSeed(e) {
-  	console.log('Seed');
   	SlideActions.updateAll(Seed);
   }
 
@@ -45,7 +44,6 @@ class NewPresentation extends Component {
 	}
 
 		_onChange(){
-			console.log('onchage!');
 			let allSlides = SlideStore.getAllSlides();
 			if( allSlides.length > 0 ){
 				window.AppRouter.transitionTo('/slide/1');

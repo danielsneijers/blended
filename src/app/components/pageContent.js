@@ -32,7 +32,6 @@ class PageContent extends Component {
 		if ( slideCount && routeId > slideCount){
 			this.props.navigateTo('last');
 		} else if(slideCount == 0) {
-			console.log('no slides!');
 			window.AppRouter.transitionTo(`/start`);
 		} else {
 			this.isolateCurrentSlide(routeId);

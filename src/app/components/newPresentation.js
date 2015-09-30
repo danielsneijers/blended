@@ -33,9 +33,9 @@ class NewPresentation extends Component {
 				<div>
         	<h2>Hi there!</h2>
         	<p>There's nothing to enjoy here yet, <br/>but the world is your canvas.</p>
-        	<p><button className='button' onClick={this.handleCreateSlide}>Create a slide!</button></p>
+        	<p><button className='button start-button' onClick={this.handleCreateSlide}>Create a slide!</button></p>
         	<p>or</p>
-      		<button className='button' onChange={this.handlePresentationSeed}>
+      		<button className='button seed-button' onChange={this.handlePresentationSeed}>
       			Enjoy Daniel's Awesome Presentation ™
         	</button>
         </div>

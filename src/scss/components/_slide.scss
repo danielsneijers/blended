@@ -40,8 +40,21 @@ $offset: $sidebarWidth + $padding + $margin;
 		font-size: 1em;
 		font-weight: inherit;
 	}
-	p {
-		margin: 2em 0 1em 0; // Relative to font size for slide preview
+	.slide-body {
+		width: 100%;
+		font-size: 1.618em;
+		line-height: 1em;
+		margin-top: 2em;
+
+		* {
+			font-size: 1.618em;
+			line-height: 1.5em;
+			margin: 1em 0 0 0; // Em instead of rem? Relative to font size for slide preview
+		}
+	}
+	.slide-body * {
+		font-size: 1em;
+		font-weight: inherit;
 	}
 
 	.options-button {
@@ -75,7 +88,7 @@ $offset: $sidebarWidth + $padding + $margin;
 		font-weight: inherit;
 	}
 	p {
-		margin: 2em 0 1em 0; // Relative to font size for slide preview
+		margin: 2em 0 1em 0; // Em instead of rem? Relative to font size for slide preview
 	}
 	.pane {
 		display: flex;

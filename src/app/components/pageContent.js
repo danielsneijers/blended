@@ -28,6 +28,7 @@ class PageContent extends Component {
 	componentWillReceiveProps(nextProps) {
 		let routeId = nextProps.params.id,
 				slideCount = this.state.slideCount;
+
 		if ( slideCount && routeId > slideCount){
 			this.props.navigateTo('last');
 		} else if(slideCount == 0) {
@@ -74,19 +75,25 @@ class PageContent extends Component {
 	}
 
 	// onChange
-	_onChange(){
+	_onChange() {
 		// Current slide needs to be empty for 'leave' animation
-		this.setState({ currentSlide: {} });
-		let slides = SlideStore.getAllSlides();
-		slides.sort(function(a, b) {
-		  return parseInt(a.position) - parseInt(b.position);
-		});
-		this.setState({
-			allSlides: slides,
-			slideCount: slides.length
-		});
+		this._resetCurrentSlide();
+		let slides = this._sortSlides();
+		this.setState({ allSlides: slides, slideCount: slides.length });
 		this.isolateCurrentSlide(this.props.params.id);
 		this.props.setTotalSlideCount(this.state.slideCount);
+	}
+
+	// onChange Helpers
+	_resetCurrentSlide() {
+		this.setState({ currentSlide: {} });
+	}
+	_sortSlides() {
+		let _slides = SlideStore.getAllSlides();
+		_slides.sort(function(a, b) {
+		  return parseInt(a.position) - parseInt(b.position);
+		});
+		return _slides;
 	}
 };
 

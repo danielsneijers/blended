@@ -51,7 +51,7 @@ class Toolbar extends Component {
 	render() {
 		return (
     	<div className='toolbar'>
-    		<h4>Blended</h4>
+    		<h3>Blended</h3>
     		<nav className='transport-buttons'>
     			<button className='button' onClick={this.props.navigateTo.bind(this, 'first')}>
     				<img className='icon' src='/img/icon-first.svg' alt='First icon' />

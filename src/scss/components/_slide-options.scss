@@ -13,18 +13,22 @@
     box-shadow: 0 0 8px 0 rgba(0,0,0,0.1);
     transition: opacity 0.1s;
 
-    h4 {
+    h3 {
     	color: white;
     }
     input {
     	color: $grey;
+        margin-right: 1rem;
     }
     &.active {
     	opacity: 1!important;
     	pointer-events: auto;
     }
+    .update-button {
+        margin: 1rem 0;
+    }
 }
 
 .options-row {
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }

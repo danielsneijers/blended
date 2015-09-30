@@ -3,12 +3,12 @@
 @import "base/base";
 @import "base/normalize";
 @import "base/typography";
+@import "base/layout";
 
 // Mixins
 @import "mixins/aspect-ratio";
 
 // Shared
-@import "shared/grid";
 @import "shared/buttons";
 @import "shared/animations";
 
@@ -19,5 +19,4 @@
 @import "components/page-content";
 @import "components/overview";
 @import "components/slide";
-@import "components/slide-preview";
 @import "components/slide-options";

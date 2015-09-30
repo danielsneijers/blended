@@ -1,6 +1,7 @@
 import React, { Component } from 'react/addons';
 import SlideActions from '../actions/slideActions';
 import SlideStore from '../stores/slideStore';
+import Seed from '../util/seed';
 
 class NewPresentation extends Component {
 
@@ -21,8 +22,9 @@ class NewPresentation extends Component {
 	handleCreateSlide() {
 		SlideActions.createSlide();
 	}
-  handleUpload(e) {
-
+  handlePresentationSeed(e) {
+  	console.log('Seed');
+  	SlideActions.updateAll(Seed);
   }
 
 	// Render
@@ -35,7 +37,7 @@ class NewPresentation extends Component {
         	<p>There's nothing to enjoy here yet, <br/>but the world is your canvas.</p>
         	<p><button className='button start-button' onClick={this.handleCreateSlide}>Create a slide!</button></p>
         	<p>or</p>
-      		<button className='button seed-button' onChange={this.handlePresentationSeed}>
+      		<button className='button seed-button' onClick={this.handlePresentationSeed}>
       			Enjoy Daniel's Awesome Presentation ™
         	</button>
         </div>
@@ -43,6 +45,7 @@ class NewPresentation extends Component {
 	}
 
 		_onChange(){
+			console.log('onchage!');
 			let allSlides = SlideStore.getAllSlides();
 			if( allSlides.length > 0 ){
 				window.AppRouter.transitionTo('/slide/1');

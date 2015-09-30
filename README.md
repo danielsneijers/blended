@@ -4,7 +4,11 @@ A simple presentation tool, build to demonstrate the power of React + Flux with 
 
 ## Running it
 
-You need to have [Node.js](https://nodejs.org/en/) and NPM installed. Then...
+You need to have [Node.js](https://nodejs.org/en/) and NPM installed. With those in place, install Gulp and Jest-cli and Webpack
+
+	$ npm install -g gulp jest-cli webpack
+
+ Then...
 
     $ npm install
     $ npm start

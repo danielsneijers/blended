@@ -48,7 +48,7 @@ class Main extends Component {
 	// Render
 	render() {
 		return (
-			<div id='page-container'>
+			<div id='page-container' className='fill-screen'>
         <Toolbar {...this.props} navigateTo={this.navigateTo} />
         <div>
         	<RouteHandler {...this.props} navigateTo={this.navigateTo} setTotalSlideCount={this.setTotalSlideCount} />

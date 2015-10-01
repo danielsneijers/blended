@@ -39,3 +39,6 @@ After a succesful install, make sure the webdriver manager is running in the bac
 If you're busy (we all are) running unit tests might be a better option. Fire up a terminal of choice and run from the root op the project:
 
 	$ npm test
+	
+## Tips
+In some rare instances I found the IndexedDB to be unresponsive while developing. I haven't encountered this in the build, but when it happens, just click the 'delete all' in the toolbar and refresh.
